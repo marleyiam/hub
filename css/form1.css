@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+/* CSS fontes */
+@font-face
+{
+font-family: gravbold;
+src: url('../fonts/Gravity-Bold.ttf'),
+url('../fonts/Gravity-Bold.eot');
+}
+
+@font-face
+{
+font-family: gravbook;
+src: url('../fonts/Gravity-Book.ttf'),
+url('../fonts/Gravity-Book.eot');
+}
+
+@font-face
+{
+font-family: gravlight;
+src: url('../fonts/Gravity-Light.ttf'),
+url('../fonts/Gravity-Light.eot');
+}
+
+
+/* CSS Document */
+
+div.content{
+	width:40%;
+	max-width:700px;
+	font-family:gravbook;
+	font-size:16pt;
+	color:#304566;
+	padding:0 5%;
+}
+
+div#pt{
+	float:left;
+}
+
+div#en{
+	float:left;
+	opacity:0.5;
+}
+
+h1{
+	font-family:gravbold;
+	font-size:22pt;
+	padding-top:100px;
+}
+
+input{
+	width:100%;
+	font-size:16pt;
+	font-family:gravlight;
+	color:#666;
+	border:solid 3px #999;
+	border-radius:10px;
+	padding:10px;
+}
+
+input[type=radio]{
+	width:20px;
+	height:20px;
+}
+ p{
+	margin-top: 50px; 
+ }

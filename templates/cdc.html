@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Consultores</title>
+<link rel="stylesheet" type="text/css" href="css/cdc.css">
+<link rel="stylesheet" type="text/css" href="css/form1.css">
+<link rel="stylesheet" type="text/css" href="css/form2.css">
+<link rel="stylesheet" type="text/css" href="css/form3.css">
+<link rel="stylesheet" type="text/css" href="css/form4.css">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script>
+dados = (Object)
+</script>
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: bigz9r7qx5wl
+  onLoad: onLinkedInLoad
+  authorize: true
+  credentials_cookie: true
+  scope: r_basicprofile r_fullprofile r_emailaddress r_contactinfo
+</script>
+
+<script type="text/javascript">
+
+  function logout(){
+    IN.User.logout(onLinkedInLogout);
+    //N.User.logout(callbackFunction, callbackScope)
+    //IN.User.logout() 
+  }
+
+  function onLinkedInLogout(){
+    window.location = window.location.href;
+  }
+
+  function onLinkedInLoad() {
+    IN.Event.on(IN, "auth", onLinkedInAuth);
+    //IN.UI.Authorize().params({"scope":["r_fullprofile","r_basicprofile","r_emailaddress","r_contactinfo"]}).place();
+  }
+
+//location:(country:(code))
+
+  function onLinkedInAuth() {
+    IN.API.Profile("me").fields('id','first-name','last-name','main-address','headline','location:(name,country:(code))','industry','summary','specialties','positions','picture-url','public-profile-url','email-address','associations','interests','languages','publications','patents','skills','certifications','educations','courses','date-of-birth','phone-numbers','bound-account-types','im-accounts','twitter-accounts','primary-twitter-account').result(displayProfiles);
+  }
+
+  function displayProfiles(profiles) {
+    dados = profiles.values[0];
+    document.getElementById("profiles").innerHTML = 
+      "<p id=\"" + dados.id + "\">Hello " +  dados.firstName + " " + dados.lastName + "</p>";
+    setFields(dados)
+  }
+
+</script>
+<script src="js/cdc.js" defer></script> 
+</head>
+
+<body>
+	<!-- Div que abrange td -->
+
+	<div id="mor">
+    	<!-- Topo -->
+    	<div id="header">
+        	<div class="divisor">
+            </div>
+        	<img src="images/topo.jpg" alt="Cadastro de Consultores" border="0" width="100%" />
+            <div class="divisor">
+            </div>
+            <div id="hub">
+            	<img src="images/hub.png" alt="Cadastro de Consultores" border="0" />
+            </div>
+            <div id="nav-top">
+                <ul>
+                    <li>
+                        <img data='1' src="images/but1.png" alt="Cadastro de Consultores" border="0" width="45" />
+                    </li>
+                    <li>
+                        <img data='2' src="images/but2.png" alt="Cadastro de Consultores" border="0" width="45" />
+                    </li>
+                    <li>
+                        <img data='3' src="images/but3.png" alt="Cadastro de Consultores" border="0" width="45" />
+                    </li>
+                    <li>
+                        <img data='4' src="images/but4.png" alt="Cadastro de Consultores" border="0" width="45" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Corpo do cadastro -->
+        <div id="content">
+
+            <script type="IN/Login"></script>
+
+            <div id="profiles"></div>
+
+            <a href="#" OnClick="return logout();">Logout</a>
+            <div id="fb-root"></div>
+
+        	<form name="cdc" action="cdc.xxx" method="get">
+<!-- Corpo do cadastro portugues-->
+                <script>
+                /*$('[name="cdc"]').load('form1.html',function(){
+                    $pt = $(this).find('[id^="pt"]');
+                    $en = $(this).find('[id^="en"]');
+
+                    $pt.on('focus','input',function(){
+                        $pt.css('opacity','1');
+                        $en.css('opacity','0.5');
+                    })
+
+                    $en.on('focus','input',function(){
+                        $en.css('opacity','1');
+                        $pt.css('opacity','0.5');
+                    })
+
+                    btns(1)
+                });*/
+                $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click')
+                </script>
+         	</form>
+        </div>
+        
+        <!-- Navegacao entre as paginas do cadastro -->
+        <div id="footer">
+        	<img name="prev" src="images/setaC_01.png" class="fim" alt="Previous Page" border="0" />
+          <img name="next" src="images/setaAZ_02.png" class="comeco" alt="Next Page" border="0" />
+        </div>
+    </div>
+</body>
+
+</html>
+

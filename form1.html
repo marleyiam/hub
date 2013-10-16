@@ -1,0 +1,413 @@
+<!-- Corpo do cadastro portugues-->
+<div id="pt" class="content" data="1">
+	<h1>Nome completo</h1>
+	<p>
+	Nome<br/>
+	<input name="nome" type="text" required>
+    </p>
+    <p>
+	Sobrenome(s) do meio<br/>
+	<input name="sobrenomenome-meio" type="text">
+    </p>
+    <p>
+	Sobrenome (Último)<br/>
+	<input name="sobrenomenome-ultimo" type="text" required>
+    </p>
+    <p>
+    Nome notório<br/>
+    <input name="nome-notorio" type="text">
+    </p>
+    
+    
+    <h1>Endereço para envio de correspondência</h1>
+    <p>
+	Logradouro, números e cidade<br />
+	<input name="logradouro" type="text">
+    </p>
+    <p>
+	Estado<br />
+	<input name="estado" type="text">
+    </p>
+    <p>
+	CEP<br />
+	<input name="cep" type="text">
+    </p>
+    <p>
+	País<br />
+	<input name="pais" type="text">
+    </p>
+    
+    
+    <h1>Telefone/fax/e-mail</h1>
+    <p>
+	Telefone fixo de trabalho &nbsp;&nbsp;<img class="morefield trab" src="images/plus16_icon.png" alt=""><br/>
+    <div class="arr-cont">
+	   <input name="fonetrabalho[]" type="text" class="fonetrabalho arr">
+    </div>
+    </p>
+    <p>
+	Celular &nbsp;&nbsp;<img class="morefield cel" src="images/plus16_icon.png" alt=""><br/>
+    <div class="arr-cont">
+	   <input name="celular[]" type="text" class="fonecelular arr">
+    </div>
+    </p>
+    <p>
+	Fax<br />
+	<input name="fax" type="text">
+    </p>
+    <p>
+	E-mail para trabalhos de consultoria<br />
+	<input name="email-consultoria" type="text">
+    </p>
+    <p>
+	Outros endereços de e-mail para uso eventual &nbsp;&nbsp;<img class="morefield even" src="images/plus16_icon.png" alt=""><br/>
+	<input name="email-eventual[]" type="text" class="emaileventual arr">
+    </p>
+    
+    
+    <h1>Endereço e telefones residenciais (se diferentes)</h1>
+    <p>
+	Logradouro, números e cidade<br />
+	<input name="logradouro-resid" type="text">
+    </p>
+    <p>
+	Estado<br />
+	<input name="estado-resid" type="text">
+    </p>
+    <p>
+	CEP<br />
+	<input name="cep-resid" type="text">
+    </p>
+    <p>
+	País<br />
+	<input name="pais-resid" type="text">
+    </p>
+    <p>
+	Telefone fixo residencial<br />
+	<input name="fone-resid" type="text">
+    </p>
+    
+    
+    <h1>Dados pessoais complementares</h1>
+    <p>
+	Local (Cidade, Estado) de nascimento<br />
+	<input name="local-nasc" type="text">
+    </p>
+    <p>
+	Data de nascimento<br />
+	<input name="data-nasc" type="text" required>
+    </p>
+    <p>
+	Nacionalidade de nascimento<br />
+	<input name="nacionalidade-nasc" type="text" required>
+    </p>
+    <p>
+	Nacionalidade atual<br />
+	<input name="nacionalidade-atual" type="text" required>
+    </p>
+    <p>
+	Nº de identidade<br />
+	<input name="identidade" type="text">
+    </p>
+    <p>
+	Nº de CPF-MF<br />
+	<input name="cpf" type="text" required>
+    </p>
+    <p>
+	Passaporte<br />
+	<input name="passaporte" type="text" required>
+    </p>
+    <p>
+	Status dos vistos<br />
+	<input name="status-visto" type="text">
+    </p>
+    <p>
+	Observações (texto livre)<br />
+	<input name="obs" type="text">
+    </p>
+    
+    
+    
+    <h1>Características pessoais e civis</h1>
+    <p>
+	Sexo<br />
+	<input name="sexo" type="text" required>
+    </p>
+    <p>
+	Estatura<br />
+	<input name="estatura" type="text" required>
+    </p>
+    <p>
+	Peso<br />
+	<input name="peso" type="text"required >
+    </p>
+    <p>
+	Estado Civil<br />
+	<input name="estado-civil" type="text">
+    </p>
+    
+    
+    <h1>Dados sobre dependentes e trabalho</h1>
+    <p>
+	Número de dependentes<br />
+	<input name="n-dependentes" type="text">
+    </p>
+    <p>
+	Está empregado hoje?<br />
+	<input name="empregado" type="radio" value="sim">Sim
+    <input name="empregado" type="radio" value="nao">Não
+    </p>
+    <p>
+	Indicar empresa ou entidade<br />
+	<input name="empresa" type="text" required>
+    </p>
+    <p>
+	Possui pessoa jurídica (firma) própria para prática de consultoria?<br />
+	<input name="possuifirma" type="radio" value="sim">Sim<br />
+    <input name="possuifirma" type="radio" value="nao">Não
+    </p>
+    <p>
+	Favor indicar razão social<br />
+	<input name="razao-social" type="text" required>
+    </p>
+    <p>
+	CGC<br />
+	<input name="cgc" type="text" required>
+    </p>
+    <p>
+	Possui participação acionária em interesses ou outras empresas (inclusive, mas não limitadas a consultorias)?<br />
+	<input name="participacao" type="radio" value="sim">Sim<br />
+    <input name="participacao" type="radio" value="nao">Não
+    </p>
+    <p>
+    Favor indicar quais e como<br />
+	<input name="quaisecomo" type="text">
+    </p>
+    <p>
+    Aceitaria trabalho temporário?<br />
+	<input name="temporario" type="radio" value="sim">Sim<br />
+    <input name="temporario" type="radio" value="nao">Não
+    </p>
+    <p>
+    Está disposto a viajar?<br />
+	<input name="viajar" type="radio" value="sim">Sim<br />
+    <input name="viajar" type="radio" value="nao">Não
+    </p>
+    <p>
+    Aceitaria trabalhar em outra localidade?<br />
+	<input name="outra-localidade" type="radio" value="sim">Sim<br />
+    <input name="outra-localidade" type="radio" value="nao">Não
+    </p>
+    <p>
+    Em caso positivo indique quais países ou regiões em que NÃO gostaria de trabalhar<br />
+	<input name="nao-quer-trabalhar" type="text">
+    </p>
+</div>	
+
+
+
+
+<!-- Corpo do cadastro ingles-->
+<div id="en" class="content">
+	<h1>Full Name</h1>
+	<p>
+	First name<br />
+	<input name="name" type="text" required>
+    </p>
+    <p>
+	Middle name(s)<br />
+	<input name="middle-name" type="text">
+    </p>
+    <p>
+	Family (last) name<br />
+	<input name="last-name" type="text" required>
+    </p>
+    <p>
+    Known name<br />
+    <input name="known-name" type="text">
+    </p>
+    
+    
+    <h1>Adress to which correspondence should be sent</h1>
+    <p>
+	Street, numbers and city<br />
+	<input name="address" type="text">
+    </p>
+    <p>
+	State<br />
+	<input name="state" type="text">
+    </p>
+    <p>
+	ZIP code<br />
+	<input name="zipcode" type="text">
+    </p>
+    <p>
+	Country<br />
+	<input name="country" type="text">
+    </p>
+    
+    
+    <h1>Telephone/fax/e-mail</h1>
+    <p>
+	Work telephone(s) &nbsp;&nbsp;<img class="morefield work" src="images/plus16_icon.png" alt=""><br/>
+    <div class="arr-cont">
+	   <input name="workphone[]" type="text" class="workphone arr">
+    </div>
+    </p>
+    <p>
+	Mobile phoneCelular &nbsp;&nbsp;<img class="morefield mob" src="images/plus16_icon.png" alt=""><br/>
+    <div class="arr-cont">
+	   <input name="mobile[]" type="text" class="mobile arr">
+    </div>
+    </p>
+    <p>
+	Fax<br />
+	<input name="fax-en" type="text">
+    </p>
+    <p>
+	E-mail adress for consulting work<br />
+	<input name="email-consulting" type="text">
+    </p>
+    <p>
+	Other e-mail adresses &nbsp;&nbsp;<img class="morefield oths" src="images/plus16_icon.png" alt=""><br/>
+	<input name="others-email[]" type="text" class="mailothers arr">
+    </p>
+    
+    
+    <h1>Home adress and phones (in case if different)</h1>
+    <p>
+	Street, numbers and city<br />
+	<input name="adress-home" type="text">
+    </p>
+    State<br />
+	<input name="state-home" type="text">
+    </p>
+    <p>
+	ZIP code<br />
+	<input name="zipcode-home" type="text">
+    </p>
+    <p>
+	Country<br />
+	<input name="country-home" type="text">
+    </p>
+    <p>
+	Home Telephone(s)<br />
+	<input name="phone-home" type="text">
+    </p>
+    
+    
+    <h1>Complementary personal data</h1>
+    <p>
+	Place (City, Estate) of birth<br />
+	<input name="place-birth" type="text">
+    </p>
+    <p>
+	Date of birth<br />
+	<input name="date-birth" type="text" required>
+    </p>
+    <p>
+	Nationality at birth<br />
+	<input name="nationality-birth" type="text">
+    </p>
+    <p>
+	Present nationality<br />
+	<input name="present-nationality" type="text" required>
+    </p>
+    <p>
+	ID Number (or driver license)<br />
+	<input name="id" type="text">
+    </p>
+    <p>
+	Social security number<br />
+	<input name="ssn" type="text" required>
+    </p>
+    <p>
+	Passport number<br />
+	<input name="passport" type="text" required>
+    </p>
+    <p>
+	Visas Status<br />
+	<input name="visas-status" type="text">
+    </p>
+    <p>
+	Remarks (free text)<br />
+	<input name="remarks" type="text">
+    </p>
+    
+    
+    
+    <h1>Personal and civilian characteristics</h1>
+    <p>
+	Sex<br />
+	<input name="sex" type="text" required>
+    </p>
+    <p>
+	Height<br />
+	<input name="height-yeah" type="text" required>
+    </p>
+    <p>
+	Weight<br />
+	<input name="weight" type="text" required>
+    </p>
+    <p>
+	Marital status<br />
+	<input name="marital-status" type="text">
+    </p>
+    
+    
+    <h1>Data on dependents and work</h1>
+    <p>
+	Number of dependents<br />
+	<input name="n-dependents" type="text">
+    </p>
+    <p>
+	Employed today?<br />
+	<input name="employed" type="radio" value="yes">Yes<br />
+    <input name="employed" type="radio" value="no">No
+    </p>
+    <p>
+	Indicate company or entity<br />
+	<input name="company" type="text" required>
+    </p>
+    <p>
+	Do you have your own company for rendering consulting services?<br />
+	<input name="own-company" type="radio" value="yes">Yes<br />
+    <input name="own-company" type="radio" value="no">No
+    </p>
+    <p>
+	Indicate entire name of the company<br />
+	<input name="company-name" type="text">
+    </p>
+    <p>
+	Tax reg. nb. (or CGC)<br />
+	<input name="cgc-en" type="text">
+    </p>
+    <p>
+	Do you have participation in interests or other company(ies) (including but not limited to other consulting firms)?<br />
+	<input name="participation" type="radio" value="yes">Yes<br />
+    <input name="participation" type="radio" value="no">No
+    </p>
+    <p>
+    Please indicate which and how<br />
+	<input name="whichandhow" type="text">
+    </p>
+    <p>
+    Would you accept temporary work?<br />
+	<input name="temporary" type="radio" value="yes">Yes<br />
+    <input name="temporary" type="radio" value="no">No
+    </p>
+    <p>
+    are you willing to travel?<br />
+	<input name="travel" type="radio" value="yes">Yes<br />
+    <input name="travel" type="radio" value="no">No
+    </p>
+    <p>
+    Would you accept working outside the headquarters area?<br />
+	<input name="other-place" type="radio" value="yes">Yes<br />
+    <input name="other-place" type="radio" value="no">No
+    </p>
+    <p>
+    If answer is "Yes", list the countries in which you would be UNWILLING to work<br />
+	<input name="unwilling" type="text">
+    </p>
+</div>
