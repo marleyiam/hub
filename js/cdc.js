@@ -332,8 +332,10 @@ Array.prototype.inArray = function(comparer) {
     return false;
 }*/
 Array.prototype.contains = function(v) {
+	//console.log('contains')
     var i = this.length
     while (i--) {
+
         //console.log(this[i][Object.keys(this[i])[0]])
    
         if (this[i][Object.keys(this[i])[0]] == v) {
@@ -341,6 +343,31 @@ Array.prototype.contains = function(v) {
         }
     }
     return false
+}
+
+Array.prototype.exists = function(p1,p2,p3,p4,p5,p6,p7){
+
+	obj = [p1,p2,p3,p4,p5,p6,p7]
+	ct = 0;
+	index = 0;
+	
+	for(var k in this){
+
+		for(var i in this[k]){
+			if(typeof(this[k][i])!==undefined && typeof(this[k][i])!=='function' && this[k][i] instanceof Function == false ){
+			    //console.log(this[k][i]+' '+obj[index].toString())
+				this[k][i] == obj[index].toString()? ct++ : '';
+				index+=1;
+			}
+		}
+		index = 0;
+
+		if(ct == 7){
+			return true
+		}else{
+			ct = 0
+		}
+	}	
 }
 
 //activities,degree,endDate,startDate,fieldOfStudy,schoolName
@@ -472,6 +499,7 @@ function getFormData(){
 	val = "";
 	obj2 = Object;
 	$positions_list = $('.arrr');
+	//console.log($positions_list)
 	pl = $positions_list.length;
 
 	$ilist.each(function(i,it){
@@ -516,25 +544,28 @@ function getFormData(){
 
 		$(it).children().each(function(i,item){
 			$item = $(item)
+			//console.log($item) todos
 
 			var class_name = $item.attr('class').replace(/\d+/g,'')
-
+				//console.log('pos_or_edu(class_name) :'+pos_or_edu(class_name)+'  classname '+class_name) todos passam
 				if(pos_or_edu(class_name) === 'position'){
 
 					$npts = $item.find('.fields').find('p').find('input')
 					//lang = $item.parent().parent().attr('id').replace(/\d+/g,'').replace(/[-]/g,'')
 
-					if(objConsultor.positions.contains($npts[0].value)){
-
+					exist = false;
+		
+					exist = objConsultor.positions.exists($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
+												 $npts[4].value, $npts[5].value, class_name)
+						
+					if(exist===true){
+						//console.log('exist')
 					}else{
-
-						objConsultor.addPosition($npts[0].value,$npts[1].value,$npts[2].value,$npts[3].value,
-												 $npts[4].value,$npts[5].value, class_name)
+						//console.log('non exciste')
+						objConsultor.addPosition($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
+												 $npts[4].value, $npts[5].value, class_name)
 					}
 
-					/*if(!objConsultor.positions.contains(val)){
-						objConsultor.addFone(val, name);
-					}*/
 				}else if(pos_or_edu(class_name) === 'education'){
 
 				}
@@ -660,6 +691,7 @@ function setUp(ref,dados){
 	setFields(dados);
 	cloneField(ref);
 	clonePosition(ref);	
+	getFormData();
 }
 
 $(document).ready(function() {
@@ -705,7 +737,7 @@ $(document).ready(function() {
 	$('#hub').click(function(e){
 		e.preventDefault();
 		z = JSON.stringify(getFormData());
-		//console.log(z)
+		console.log(z)
 		console.log('click')
 		$.ajax({
 			type: 'post',
