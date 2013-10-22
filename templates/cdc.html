@@ -24,7 +24,7 @@ dados = (Object)
 
 <script type="text/javascript">
 
-  function logout(){
+  /*function logout(){
     IN.User.logout(onLinkedInLogout);
     //N.User.logout(callbackFunction, callbackScope)
     //IN.User.logout() 
@@ -32,7 +32,7 @@ dados = (Object)
 
   function onLinkedInLogout(){
     window.location = window.location.href;
-  }
+  }*/
 
   function onLinkedInLoad() {
     IN.Event.on(IN, "auth", onLinkedInAuth);
@@ -95,7 +95,7 @@ dados = (Object)
 
             <div id="profiles"></div>
 
-            <a href="#" OnClick="return logout();">Logout</a>
+            <a href="javascript:void(0)" onClick="IN.User.logout()">Logout</a>
             <div id="fb-root"></div>
 
         	<form name="cdc" action="cdc.xxx" method="get">

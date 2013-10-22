@@ -469,7 +469,8 @@ addFone : function(number, type){
 
 function hasK(k){
 	dik = {"trab":"fonetrabalho[]","cel":"celular[]","even":"email-eventual[]","work":"workphone[]","mob":"mobile[]",
-			"oths":"others-email[]","atual":"trab-atual","ant":"trab-anterior","actual":"actual-job","prev":"prev-job"}
+			"oths":"others-email[]","atual":"trab-atual","ant":"trab-anterior","actual":"actual-job","prev":"prev-job"
+			,"mico":"academico","mic":"academic"}
 
 	x = dik.hasOwnProperty(k)? k:0
  	return dik[x]
@@ -596,8 +597,11 @@ function clonePosition(ref){
 		e.preventDefault();
 
 		k = $(this).attr('class').split(' ');
+		//console.log('k :'+ k) //atual.actul,prev,anterior
 		klazz = hasK(k[1]);
+		//console.log('klazz :'+klazz)
 		clast = ref.parent().parent().find('[class^="'+klazz+'"]').last().attr('class')
+		//console.log('clast :'+clast)
 		ctd_field++;
 
 		$first = ref.parent().parent().find('[class^="'+klazz+'"]').first()
@@ -667,6 +671,87 @@ function clonePosition(ref){
 		$(this).parent().remove()
 		$(this).remove()
 	});
+
+		ref.find('.morefield_frm4').parent().parent().on('click','.morefield_frm4',function(e){
+			e.preventDefault();
+			//console.log($(this).attr('class'))
+
+			k = $(this).attr('class').split(' ');
+			//console.log('k :'+ k) //atual.actul,prev,anterior cademico,cademic
+			klazz = hasK(k[1]);
+			//console.log('klazz :'+klazz)
+			clast = ref.parent().parent().find('[class^="'+klazz+'"]').last().attr('class')
+			console.log('clast :'+clast) //nome da ultima class?
+
+			ctd_field++;
+
+			$first = ref.parent().parent().find('[class^="'+klazz+'"]').first()
+			console.log('first')
+			console.log($first)
+
+			$first.children('.fields').find('input').each(function(i,it){
+				$inputs[i] = $(it)	
+			})
+			console.log('inputs')
+			console.log($inputs)
+
+			cc = '.'+klazz;
+
+			$(cc).find('p').each(function(i,it){
+				$labels[i] = $(it).text().trim()
+			})
+
+			console.log('labels')
+			console.log($labels)
+
+			/*num = parseInt(clast.match(/\d+/g))
+			n = num+ctd_field
+			n_klazz = clast.replace(/\d+/g,n)
+			if(n_klazz === clast){
+			    real_class = clast+ctd_field
+			}else{
+				real_class = n_klazz
+			}
+
+			$cloneposition = '<div class="'+real_class+'">';
+	        $cloneposition += '<fieldset class="fields">';
+	              $cloneposition += '<legend></legend>';
+	                $cloneposition += '<p>';
+	            		$cloneposition += $labels[0]+'<br />';
+	            		$cloneposition += '<input name="'+$inputs[0].attr('name')+'" type="text">';
+	                $cloneposition += '</p>';
+	                $cloneposition += '<p>';
+	            	$cloneposition += $labels[1].split(' ')[0]+'<input name="'+$inputs[1].attr('name')+'" class="data" type="text"> '+$labels[1].split(' ')[2]+' <input name="'+$inputs[2].attr('name')+'"  class="data" type="text">';
+	                $cloneposition += '</p>';
+	                $cloneposition += '<p>';
+	            	$cloneposition += $labels[2]+'<br />';
+	            	$cloneposition += '<input name="'+$inputs[3].attr('name')+'" type="text">';
+	                $cloneposition += '</p>';
+	                $cloneposition += '<p>';
+	            	$cloneposition += $labels[3]+'<br />';
+	            	$cloneposition += '<input name="'+$inputs[4].attr('name')+'" type="text">';
+	                $cloneposition += '</p>';
+	                $cloneposition += '<p>';
+	            	$cloneposition += $labels[4]+'<br />'
+	            	$cloneposition += '<input name="'+$inputs[5].attr('name')+'" type="text"><br />';
+	                $cloneposition += '<span class="desc">'
+	                $cloneposition += $labels[5];
+	                $cloneposition += '</span>';
+	                $cloneposition += '</p>';
+	            $cloneposition += '</fieldset>';
+	            $cloneposition += '<img class="minus_frm3" data-field="'+ctd_field+'" src ="images/minus16_icon.png"/></div>';
+	        $cloneposition += '</div>';
+
+			$cloneposition = $($cloneposition);
+		
+			$last = ref.parent().parent().find('[class^="'+klazz+'"]').last();
+			$cloneposition.attr('class',real_class).css('margin-top','40px');
+
+			$last.after($cloneposition);*/
+
+			//$('html,body').animate({scrollTop:$(ref.parent().parent().find('.'+real_class+'')).offset().top}, 800);
+
+		});
 }
 
 function cloneField(form){
