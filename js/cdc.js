@@ -337,7 +337,6 @@ Array.prototype.contains = function(v) {
     while (i--) {
 
         //console.log(this[i][Object.keys(this[i])[0]])
-   
         if (this[i][Object.keys(this[i])[0]] == v) {
             return true
         }
@@ -346,45 +345,27 @@ Array.prototype.contains = function(v) {
 }
 
 Array.prototype.exists = function(p1,p2,p3,p4,p5,p6,p7){
-        //console.log('Exists?')
-        obj = [p1,p2,p3,p4,p5,p6,p7]
-        ct = 0;
-        index = 0;
-        e = -1;
-        
-        for(var k in this){
-        	//console.log('obj atual da colecao')
-        	//console.log(this[k])
-        	e+=1;
-                for(var i in this[k]){
 
-                        if(typeof(this[k][i])!=='undefined' && typeof(this[k][i])!=='function' && this[k][i] instanceof Function == false ){
-                          //console.log('indice atual :'+index)
-                          //console.log('val do obj :'+this[k][i].toString()+' == '+' val do param :'+obj[index].toString())
-                         //console.log(this[k][i]+' '+obj[index].toString())
-                                this[k][i].toString() == obj[index].toString()? ct++ : '';
-                                index+=1;
-                                
-                                //console.log('val do ct :'+ct)
-                        }
-                }
-                index = 0;
-                //console.log('val final do ct :'+ct)
-                if(ct == 7){
-                        //console.log('igual')
-                        //console.log(this[k])
-                        /*for(var i in this[k]){
-                        	 this[k][i] = obj[index].toString()
-                        }*/
-                        console.log(' e:'+e)
-                        console.log(this[e])
-                        return true
-                }else{
-                        //console.log('diferente')
-                        //console.log(this[k])
-                        ct = 0
-                }
-        }        
+	obj = [p1,p2,p3,p4,p5,p6,p7]
+	ct = 0;
+	index = 0;
+	
+	for(var k in this){	
+		for(var i in this[k]){
+			if(typeof(this[k][i])!==undefined && typeof(this[k][i])!=='function' && this[k][i] instanceof Function == false ){
+			    //console.log(this[k][i]+' '+obj[index].toString())
+				this[k][i] == obj[index].toString()? ct++ : '';
+				index+=1;
+			}
+		}
+		index = 0;
+
+		if(ct == 7){
+			return true
+		}else{
+			ct = 0
+		}
+	}	
 }
 
 //activities,degree,endDate,startDate,fieldOfStudy,schoolName
@@ -511,7 +492,7 @@ function pos_or_edu(class_name){
 
 function getFormData(){
 
-	$ilist = $('input').not('.exclude');
+	$ilist = $('input');
 	ll = $ilist.length;
 	val = "";
 	obj2 = Object;
@@ -557,46 +538,49 @@ function getFormData(){
 		    	}
 		    }	
 	})// fim do ilist.each
-	$positions_list.each(function(ii,it){
 
-		$(it).children().each(function(i,item){
+		$positions_list.children().each(function(i,item){
 			$item = $(item)
-			//console.log(' ii :'+ii+' , i :'+i+' , el :'+$item.find('.fields').find('p').find('input:eq(0)').val())
+			//console.log('i: '+i)
+			//console.log($(item).find('input:eq(0)').val())
 
 			var class_name = $item.attr('class').replace(/\d+/g,'')
+
 				if(pos_or_edu(class_name) === 'position'){
 
 					$npts = $item.find('.fields').find('p').find('input')
+					//lang = $item.parent().parent().attr('id').replace(/\d+/g,'').replace(/[-]/g,'')
 
 					exist = false;
 		
 					exist = objConsultor.positions.exists($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
 												 $npts[4].value, $npts[5].value, class_name)
-
-					//console.log('EXIST')
-					//console.log(exist)
 						
-					if(exist==true){
-						console.log('existe!')
-						/*objConsultor.positions[i].companyName = $npts[0].value
-						objConsultor.positions[i].startDate = $npts[1].value
-						objConsultor.positions[i].endDate = $npts[2].value
-						objConsultor.positions[i].positionTitle = $npts[3].value
-						objConsultor.positions[i].industry = $npts[4].value
-						objConsultor.positions[i].summary = $npts[5].value
-						objConsultor.positions[i].type = class_name*/
+					if(exist===true){
+						//console.log('exist')
 					}else{
-						//if(typeof(objConsultor.positions[i]!='undefined')){console.log('Defined in :'+ii+' e '+i+' , el:'+$item.find('.fields').find('p').find('input:eq(0)').val())}else{ console.log('undefined in '+ii+' e '+i)}
-						//console.log('non exciste!')
-						objConsultor.addPosition($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
-												 $npts[4].value, $npts[5].value, class_name)
-					}
+						//console.log('non exciste')
+						if(typeof(objConsultor.positions[i])!="undefined"){
 
+							objConsultor.positions[i].companyName = $npts[0].value
+							objConsultor.positions[i].startDate = $npts[1].value
+							objConsultor.positions[i].endDate = $npts[2].value
+							objConsultor.positions[i].positionTitle = $npts[3].value
+							objConsultor.positions[i].industry = $npts[4].value
+							objConsultor.positions[i].summary = $npts[5].value
+							objConsultor.positions[i].type = class_name
+
+						}else{
+							
+							objConsultor.addPosition($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
+													 $npts[4].value, $npts[5].value, class_name)
+						}
+					}
 				}else if(pos_or_edu(class_name) === 'education'){
 
 				}
 		})
-	})
+	//})
 	return objConsultor;
 }
 
@@ -806,10 +790,3 @@ $(document).ready(function() {
 	   cloneField($("#nav-top").parent().parent().find('[name="cdc"]'));
 
 });
-
-
-
-
-
-
-
