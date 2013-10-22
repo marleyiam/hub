@@ -337,7 +337,6 @@ Array.prototype.contains = function(v) {
     while (i--) {
 
         //console.log(this[i][Object.keys(this[i])[0]])
-   
         if (this[i][Object.keys(this[i])[0]] == v) {
             return true
         }
@@ -351,8 +350,7 @@ Array.prototype.exists = function(p1,p2,p3,p4,p5,p6,p7){
 	ct = 0;
 	index = 0;
 	
-	for(var k in this){
-
+	for(var k in this){	
 		for(var i in this[k]){
 			if(typeof(this[k][i])!==undefined && typeof(this[k][i])!=='function' && this[k][i] instanceof Function == false ){
 			    //console.log(this[k][i]+' '+obj[index].toString())
@@ -540,14 +538,14 @@ function getFormData(){
 		    	}
 		    }	
 	})// fim do ilist.each
-	$positions_list.each(function(i,it){
 
-		$(it).children().each(function(i,item){
+		$positions_list.children().each(function(i,item){
 			$item = $(item)
-			//console.log($item) todos
+			//console.log('i: '+i)
+			//console.log($(item).find('input:eq(0)').val())
 
 			var class_name = $item.attr('class').replace(/\d+/g,'')
-				//console.log('pos_or_edu(class_name) :'+pos_or_edu(class_name)+'  classname '+class_name) todos passam
+
 				if(pos_or_edu(class_name) === 'position'){
 
 					$npts = $item.find('.fields').find('p').find('input')
@@ -562,15 +560,27 @@ function getFormData(){
 						//console.log('exist')
 					}else{
 						//console.log('non exciste')
-						objConsultor.addPosition($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
-												 $npts[4].value, $npts[5].value, class_name)
-					}
+						if(typeof(objConsultor.positions[i])!="undefined"){
 
+							objConsultor.positions[i].companyName = $npts[0].value
+							objConsultor.positions[i].startDate = $npts[1].value
+							objConsultor.positions[i].endDate = $npts[2].value
+							objConsultor.positions[i].positionTitle = $npts[3].value
+							objConsultor.positions[i].industry = $npts[4].value
+							objConsultor.positions[i].summary = $npts[5].value
+							objConsultor.positions[i].type = class_name
+
+						}else{
+							
+							objConsultor.addPosition($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
+													 $npts[4].value, $npts[5].value, class_name)
+						}
+					}
 				}else if(pos_or_edu(class_name) === 'education'){
 
 				}
 		})
-	})
+	//})
 	return objConsultor;
 }
 
@@ -780,10 +790,3 @@ $(document).ready(function() {
 	   cloneField($("#nav-top").parent().parent().find('[name="cdc"]'));
 
 });
-
-
-
-
-
-
-
