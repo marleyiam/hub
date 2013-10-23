@@ -48,9 +48,10 @@ dados = (Object)
   function displayProfiles(profiles) {
     dados = profiles.values[0];
     document.getElementById("profiles").innerHTML = 
-      "<p id=\"" + dados.id + "\">Hello " +  dados.firstName + " " + dados.lastName + "</p>";
+      "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
     setFields(dados)
   }
+
 
 </script>
 <script src="js/cdc.js" defer></script> 
@@ -95,7 +96,7 @@ dados = (Object)
 
             <div id="profiles"></div>
 
-            <a href="javascript:void(0)" onClick="IN.User.logout()">Logout</a>
+            <a href="javascript:void(0)" onClick="IN.User.logout()"><i>Clique aqui para sair do Linkedin</i></a>
             <div id="fb-root"></div>
 
         	<form name="cdc" action="cdc.xxx" method="get">

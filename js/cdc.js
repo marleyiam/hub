@@ -18,6 +18,7 @@ function getIP() {
 }
 
 function setFields(dados){
+ if(Object.keys(dados).length>1){
 	$('[name="nome"]').val(dados.firstName)
 	$('[name="name"]').val(dados.firstName)
 	$('[name="sobrenomenome-ultimo"]').val(dados.lastName)
@@ -250,6 +251,8 @@ function setFields(dados){
 		})
 	}).trigger('click')*/
 
+	}//fim if
+
 }
 
 function setOpacity(el){
@@ -384,8 +387,9 @@ addMail : function(address, type){
 	objConsultor.mails.push({"emailAddress" : address, "emailType" : type})
 },
 "educations" : [], 
-addEducation : function(number, type){
-	objConsultor.educations.push({"phoneNumer" : number, "phoneType" : type})
+addEducation : function(school_name, local, start_date, end_date, activities, degree, type){
+	objConsultor.educations.push({"schoolName" : school_name, "local" : local, "startDate":start_date, "endDate" : end_date,
+							"activities" : activities, "degree" : degree, "type" : type})
 },
 "positions" : [],
 addPosition : function(company_name, start_date, end_date, position_title, industry, summary, type){
@@ -490,16 +494,15 @@ function pos_or_edu(class_name){
 }
  
 
-
 function getFormData(){
 
 	$ilist = $('input');
 	ll = $ilist.length;
 	val = "";
 	obj2 = Object;
-	$positions_list = $('.arrr');
-	//console.log($positions_list)
-	pl = $positions_list.length;
+	$multiples_list = $('.arrr');
+	//console.log($multiples_list)
+	pl = $multiples_list.length;
 
 	$ilist.each(function(i,it){
 		$el = $(it)
@@ -540,10 +543,8 @@ function getFormData(){
 		    }	
 	})// fim do ilist.each
 
-		$positions_list.children().each(function(i,item){
+		$multiples_list.children().each(function(i,item){
 			$item = $(item)
-			//console.log('i: '+i)
-			//console.log($(item).find('input:eq(0)').val())
 
 			var class_name = $item.attr('class').replace(/\d+/g,'')
 
@@ -553,10 +554,8 @@ function getFormData(){
 					//lang = $item.parent().parent().attr('id').replace(/\d+/g,'').replace(/[-]/g,'')
 
 					exist = false;
-		
 					exist = objConsultor.positions.exists($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
-												 $npts[4].value, $npts[5].value, class_name)
-						
+												$npts[4].value, $npts[5].value, class_name)	
 					if(exist===true){
 						//console.log('exist')
 					}else{
@@ -578,10 +577,32 @@ function getFormData(){
 						}
 					}
 				}else if(pos_or_edu(class_name) === 'education'){
+					$npts = $item.find('.fields').find('p').find('input')
 
+					exists = false;
+					exists = objConsultor.educations.exists($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
+												$npts[4].value, $npts[5].value, class_name)
+					if(exists===true){
+					}else{
+	
+						if(typeof(objConsultor.educations[i])!="undefined"){
+
+							objConsultor.educations[i].schoolName = $npts[0].value
+							objConsultor.educations[i].local = $npts[1].value
+							objConsultor.educations[i].startDate = $npts[2].value
+							objConsultor.educations[i].endDate = $npts[3].value
+							objConsultor.educations[i].activities = $npts[4].value
+							objConsultor.educations[i].degree = $npts[5].value
+							objConsultor.educations[i].type = class_name
+
+						}else{
+							
+							objConsultor.addEducation($npts[0].value, $npts[1].value, $npts[2].value, $npts[3].value,
+													 $npts[4].value, $npts[5].value, class_name)
+						}
+					}
 				}
 		})
-	//})
 	return objConsultor;
 }
 
@@ -597,11 +618,9 @@ function clonePosition(ref){
 		e.preventDefault();
 
 		k = $(this).attr('class').split(' ');
-		//console.log('k :'+ k) //atual.actul,prev,anterior
 		klazz = hasK(k[1]);
-		//console.log('klazz :'+klazz)
 		clast = ref.parent().parent().find('[class^="'+klazz+'"]').last().attr('class')
-		//console.log('clast :'+clast)
+	
 		ctd_field++;
 
 		$first = ref.parent().parent().find('[class^="'+klazz+'"]').first()
@@ -629,8 +648,8 @@ function clonePosition(ref){
         $cloneposition += '<fieldset class="fields">';
               $cloneposition += '<legend></legend>';
                 $cloneposition += '<p>';
-            		$cloneposition += $labels[0]+'<br />';
-            		$cloneposition += '<input name="'+$inputs[0].attr('name')+'" type="text">';
+            	$cloneposition += $labels[0]+'<br />';
+            	$cloneposition += '<input name="'+$inputs[0].attr('name')+'" type="text">';
                 $cloneposition += '</p>';
                 $cloneposition += '<p>';
             	$cloneposition += $labels[1].split(' ')[0]+'<input name="'+$inputs[1].attr('name')+'" class="data" type="text"> '+$labels[1].split(' ')[2]+' <input name="'+$inputs[2].attr('name')+'"  class="data" type="text">';
@@ -665,7 +684,7 @@ function clonePosition(ref){
 
 	});
 
-	$('.morefield_frm3').parent().parent().on('click','.minus_frm3',function(e){
+	$('.morefield_frm3,.morefield_frm4').parent().parent().on('click','.minus_frm3',function(e){
 		//console.log('minus')
 		$('html,body').animate({scrollTop:$($(this).parent().prevAll().first()).offset().top}, 800);
 		$(this).parent().remove()
@@ -674,35 +693,25 @@ function clonePosition(ref){
 
 		ref.find('.morefield_frm4').parent().parent().on('click','.morefield_frm4',function(e){
 			e.preventDefault();
-			//console.log($(this).attr('class'))
 
 			k = $(this).attr('class').split(' ');
-			//console.log('k :'+ k) //atual.actul,prev,anterior cademico,cademic
+
 			klazz = hasK(k[1]);
-			//console.log('klazz :'+klazz)
 			clast = ref.parent().parent().find('[class^="'+klazz+'"]').last().attr('class')
-			//console.log('clast :'+clast) //nome da ultima class?
 
 			ctd_field++;
 
 			$first = ref.parent().parent().find('[class^="'+klazz+'"]').first()
-			//console.log('first')
-			//console.log($first)
 
 			$first.children('.fields').find('input').each(function(i,it){
 				$inputs[i] = $(it)	
 			})
-			//console.log('inputs')
-			//console.log($inputs)
 
 			cc = '.'+klazz;
 
 			$(cc).find('p').each(function(i,it){
 				$labels[i] = $(it).text().trim()
 			})
-
-			//console.log('labels')
-			console.log($labels)
 
 			num = parseInt(clast.match(/\d+/g))
 			n = num+ctd_field
@@ -712,47 +721,13 @@ function clonePosition(ref){
 			}else{
 				real_class = n_klazz
 			}
-			console.log('real class: '+real_class)
-			/*
-
-			0"Nome da instituição", 
-			1"Local (cidade, estado e país)", 
-			2"De A", "Tipo de estudo", 0  1
-			3"Título, 
-			4certificado ou diploma conquistado"
-
-
-			<p>
-			Nome da instituição<br />
-			<input name="nome-inst" type="text">
-			</p>
-
-			<p>
-			Local (cidade, estado e país)<br />
-			<input name="local-academico" type="text">
-			</p>
-
-			<p>
-			De <input name="de-academico" type="text"> A <input name="ate-academico" type="text">
-			</p>
-
-			<p>
-			Tipo de estudo<br />
-			<input name="tipo-estudo" type="text">
-			</p>
-
-			<p>
-			Título, certificado ou diploma conquistado<br />
-			<input name="titulo-conquistado" type="text">
-			</p>
-			*/
 			
 			$cloneducation = '<div class="'+real_class+'">';
 	        $cloneducation += '<fieldset class="fields">';
 	              $cloneducation += '<legend></legend>';
 	                $cloneducation += '<p>';
-	            		$cloneducation += $labels[0]+'<br />';
-	            		$cloneducation += '<input name="'+$inputs[0].attr('name')+'" type="text">';
+	            	$cloneducation += $labels[0]+'<br />';
+	            	$cloneducation += '<input name="'+$inputs[0].attr('name')+'" type="text">';
 	                $cloneducation += '</p>';
 	                $cloneducation += '<p>';
 	                $cloneducation += $labels[1]+'<br />';
@@ -770,20 +745,17 @@ function clonePosition(ref){
 	            	$cloneducation += '<input name="'+$inputs[5].attr('name')+'" type="text"><br />';
 	                $cloneducation += '</p>';
 	            $cloneducation += '</fieldset>';
-	            $cloneducation += '<img class="minus_frm4" data-field="'+ctd_field+'" src ="images/minus16_icon.png"/></div>';
+	            $cloneducation += '<img class="minus_frm3" data-field="'+ctd_field+'" src ="images/minus16_icon.png"/></div>';
 	        $cloneducation += '</div>';
 
 			$cloneducation = $($cloneducation);
-			//console.log($cloneducation)
 		
 			$last = ref.parent().parent().find('[class^="'+klazz+'"]').last();
-			console.log($last)
 			$cloneducation.attr('class',real_class).css('margin-top','40px');
 
 			$last.after($cloneducation);
 
-			//$('html,body').animate({scrollTop:$(ref.parent().parent().find('.'+real_class+'')).offset().top}, 800);
-
+			$('html,body').animate({scrollTop:$(ref.parent().parent().find('.'+real_class+'')).offset().top}, 800);
 		});
 }
 
@@ -816,9 +788,9 @@ function cloneField(form){
 function setUp(ref,dados){
 	setOpacity(ref)
 	btns(prev);
-	setFields(dados);
 	cloneField(ref);
 	clonePosition(ref);	
+	setFields(dados);
 	getFormData();
 }
 
@@ -904,6 +876,7 @@ $(document).ready(function() {
 	});
 	});
 	*/
+		// trigger no form1
 	   $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click');
 	   cloneField($("#nav-top").parent().parent().find('[name="cdc"]'));
 
