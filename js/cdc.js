@@ -197,13 +197,13 @@ function setFields(dados){
 	var lobras = Object.keys(dados.publications).length
 	for(var i = 0; i<lobras; i++){
 	        if(i == 0){
-	            $('[name="obras"]:eq(0)').val(dados.publications.values[0].title)
+	            //$('[name="obras"]:eq(0)').val(dados.publications.values[0].title)
 	        }
 	        if(lobras>1 && i>0){
-	        	$clone = $('[name="obras"]').clone()
-	        	$('[name="obras"]').after($clone)
-	        	$('[name="obras"]:eq('+i+')').val(dados.publications.values[i].title)
-	        	$('[name="obras"]:eq('+i+')').css('margin-top','20px')
+	        	//$clone = $('[name="obras"]').clone()
+	        	//$('[name="obras"]').after($clone)
+	        	//$('[name="obras"]:eq('+i+')').val(dados.publications.values[i].title)
+	        	//$('[name="obras"]:eq('+i+')').css('margin-top','20px')
 	        }  
 	}
 	/** phones (comercial/work,residencial/home,celular/mobile)*/
