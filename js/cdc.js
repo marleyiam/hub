@@ -681,19 +681,19 @@ function clonePosition(ref){
 			klazz = hasK(k[1]);
 			//console.log('klazz :'+klazz)
 			clast = ref.parent().parent().find('[class^="'+klazz+'"]').last().attr('class')
-			console.log('clast :'+clast) //nome da ultima class?
+			//console.log('clast :'+clast) //nome da ultima class?
 
 			ctd_field++;
 
 			$first = ref.parent().parent().find('[class^="'+klazz+'"]').first()
-			console.log('first')
-			console.log($first)
+			//console.log('first')
+			//console.log($first)
 
 			$first.children('.fields').find('input').each(function(i,it){
 				$inputs[i] = $(it)	
 			})
-			console.log('inputs')
-			console.log($inputs)
+			//console.log('inputs')
+			//console.log($inputs)
 
 			cc = '.'+klazz;
 
@@ -701,10 +701,10 @@ function clonePosition(ref){
 				$labels[i] = $(it).text().trim()
 			})
 
-			console.log('labels')
+			//console.log('labels')
 			console.log($labels)
 
-			/*num = parseInt(clast.match(/\d+/g))
+			num = parseInt(clast.match(/\d+/g))
 			n = num+ctd_field
 			n_klazz = clast.replace(/\d+/g,n)
 			if(n_klazz === clast){
@@ -712,42 +712,75 @@ function clonePosition(ref){
 			}else{
 				real_class = n_klazz
 			}
+			console.log('real class: '+real_class)
+			/*
 
-			$cloneposition = '<div class="'+real_class+'">';
-	        $cloneposition += '<fieldset class="fields">';
-	              $cloneposition += '<legend></legend>';
-	                $cloneposition += '<p>';
-	            		$cloneposition += $labels[0]+'<br />';
-	            		$cloneposition += '<input name="'+$inputs[0].attr('name')+'" type="text">';
-	                $cloneposition += '</p>';
-	                $cloneposition += '<p>';
-	            	$cloneposition += $labels[1].split(' ')[0]+'<input name="'+$inputs[1].attr('name')+'" class="data" type="text"> '+$labels[1].split(' ')[2]+' <input name="'+$inputs[2].attr('name')+'"  class="data" type="text">';
-	                $cloneposition += '</p>';
-	                $cloneposition += '<p>';
-	            	$cloneposition += $labels[2]+'<br />';
-	            	$cloneposition += '<input name="'+$inputs[3].attr('name')+'" type="text">';
-	                $cloneposition += '</p>';
-	                $cloneposition += '<p>';
-	            	$cloneposition += $labels[3]+'<br />';
-	            	$cloneposition += '<input name="'+$inputs[4].attr('name')+'" type="text">';
-	                $cloneposition += '</p>';
-	                $cloneposition += '<p>';
-	            	$cloneposition += $labels[4]+'<br />'
-	            	$cloneposition += '<input name="'+$inputs[5].attr('name')+'" type="text"><br />';
-	                $cloneposition += '<span class="desc">'
-	                $cloneposition += $labels[5];
-	                $cloneposition += '</span>';
-	                $cloneposition += '</p>';
-	            $cloneposition += '</fieldset>';
-	            $cloneposition += '<img class="minus_frm3" data-field="'+ctd_field+'" src ="images/minus16_icon.png"/></div>';
-	        $cloneposition += '</div>';
+			0"Nome da instituição", 
+			1"Local (cidade, estado e país)", 
+			2"De A", "Tipo de estudo", 0  1
+			3"Título, 
+			4certificado ou diploma conquistado"
 
-			$cloneposition = $($cloneposition);
+
+			<p>
+			Nome da instituição<br />
+			<input name="nome-inst" type="text">
+			</p>
+
+			<p>
+			Local (cidade, estado e país)<br />
+			<input name="local-academico" type="text">
+			</p>
+
+			<p>
+			De <input name="de-academico" type="text"> A <input name="ate-academico" type="text">
+			</p>
+
+			<p>
+			Tipo de estudo<br />
+			<input name="tipo-estudo" type="text">
+			</p>
+
+			<p>
+			Título, certificado ou diploma conquistado<br />
+			<input name="titulo-conquistado" type="text">
+			</p>
+			*/
+			
+			$cloneducation = '<div class="'+real_class+'">';
+	        $cloneducation += '<fieldset class="fields">';
+	              $cloneducation += '<legend></legend>';
+	                $cloneducation += '<p>';
+	            		$cloneducation += $labels[0]+'<br />';
+	            		$cloneducation += '<input name="'+$inputs[0].attr('name')+'" type="text">';
+	                $cloneducation += '</p>';
+	                $cloneducation += '<p>';
+	                $cloneducation += $labels[1]+'<br />';
+	                $cloneducation += '<input name="'+$inputs[1].attr('name')+'" type="text">';
+	                $cloneducation += '</p>';
+	                $cloneducation += '<p>';
+	            	$cloneducation += $labels[2].split(' ')[0]+'<input name="'+$inputs[2].attr('name')+'" class="data" type="text"> '+$labels[2].split(' ')[2]+' <input name="'+$inputs[3].attr('name')+'"  class="data" type="text">';
+	                $cloneducation += '</p>';
+	                $cloneducation += '<p>';
+	            	$cloneducation += $labels[3]+'<br />';
+	            	$cloneducation += '<input name="'+$inputs[4].attr('name')+'" type="text">';
+	                $cloneducation += '</p>';
+	                $cloneducation += '<p>';
+	            	$cloneducation += $labels[4]+'<br />'
+	            	$cloneducation += '<input name="'+$inputs[5].attr('name')+'" type="text"><br />';
+	                $cloneducation += '</p>';
+	            $cloneducation += '</fieldset>';
+	            $cloneducation += '<img class="minus_frm4" data-field="'+ctd_field+'" src ="images/minus16_icon.png"/></div>';
+	        $cloneducation += '</div>';
+
+			$cloneducation = $($cloneducation);
+			//console.log($cloneducation)
 		
 			$last = ref.parent().parent().find('[class^="'+klazz+'"]').last();
-			$cloneposition.attr('class',real_class).css('margin-top','40px');
+			console.log($last)
+			$cloneducation.attr('class',real_class).css('margin-top','40px');
 
-			$last.after($cloneposition);*/
+			$last.after($cloneducation);
 
 			//$('html,body').animate({scrollTop:$(ref.parent().parent().find('.'+real_class+'')).offset().top}, 800);
 
