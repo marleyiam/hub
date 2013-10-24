@@ -431,6 +431,84 @@ addFone : function(number, type){
 "outra-localidade":"",
 "nao-quer-trabalhar":"",
 
+"fatos-relevantes":"",
+"comparativo":"",
+"relevant-facts":"",
+"comparing":"",
+
+
+"capac-int":"",
+"senso-analitico":"",
+"capac-pro":"",
+"capac-ger":"",
+"qual-oratoria":"",
+"qual-redacao":"",
+"motiv":"",
+"lideranca":"",
+"capac-org":"",
+"senso-humor":"",
+"matur-emo":"",
+"capac-prazos":"",
+"capac-equipe":"",
+"nocao-responsa":"",
+"integridade":"",
+
+"tipodetrabalho":"",
+"horasdisponiveis":"",
+
+"ingles-leitura":"",
+"ingles-oral":"",
+"ingles-redacao":"",
+"espanhol-leitura":"",
+"espanhol-oral":"",
+"espanhol-redacao":"",
+"frances-leitura":"",
+"frances-oral":"",
+"frances-redacao":"",
+"portugues-leitura":"",
+"portugues-oral":"",
+"portugues-redacao":"",
+"outro-leitura":"",
+"outro-oral":"",
+"outro-redacao":"",
+
+"english-reading":"",
+"english-speaking":"",
+"english-writing":"",
+"spanish-reading":"",
+"spanish-speaking":"",
+"spanish-writing":"",
+"french-reading":"",
+"french-speaking":"",
+"french-writing":"",
+"portuguese-reading":"",
+"portuguese-speaking":"",
+"portuguese-writing":"",
+"other-reading":"",
+"other-speaking":"",
+"other-writing":"",
+
+
+
+"int-ability":"",
+"analytic-frame":"",
+"pro-orientation":"",
+"ability-manager":"",
+"qual-oral":"",
+"qual-written":"",
+"motivation":"",
+"leadership":"",
+"org-ability":"",
+"senso-humor":"",
+"emo-maturity":"",
+"deadline":"",
+"work-others":"",
+"serv-clients":"",
+"integrity":"",
+
+"kind-of-work":"",
+"hours-to-work":"",
+
 "name":"",
 "middle-name":"",
 "last-name":"",
@@ -496,7 +574,8 @@ function pos_or_edu(class_name){
 
 function getFormData(){
 
-	$ilist = $('input');
+	$ilist = $('input').not('.exclude');
+	console.log($ilist)
 	ll = $ilist.length;
 	val = "";
 	obj2 = Object;
@@ -607,7 +686,6 @@ function getFormData(){
 }
 
 function clonePosition(ref){
-	//console.log('clonePosition')
 
 	ctd_field = 0;
 	var real_class, real_ctd;
@@ -757,6 +835,7 @@ function clonePosition(ref){
 
 			$('html,body').animate({scrollTop:$(ref.parent().parent().find('.'+real_class+'')).offset().top}, 800);
 		});
+
 }
 
 function cloneField(form){
@@ -783,6 +862,11 @@ function cloneField(form){
 		$(this).parent().remove();
 		$(this).remove();
 	});
+
+	/**/
+	/*$('.pieces').parent().on('click','.pieces',function(e){
+		console.log('pieces')
+	})*/
 }
 
 function setUp(ref,dados){
@@ -817,13 +901,19 @@ $(document).ready(function() {
 		$('[name="cdc"]').load(str,function(){
 			setUp($(this),dados);
 		})
+
+		if(fn==4){
+			$("#btn-send").css('display','inline')
+		}else{
+			$("#btn-send").css('display','none')
+		}
 	});
 
 	/** botoes numerados */
 	$('#nav-top').find('ul').on('click','li',function(e){
 		e.preventDefault();
 		fn = $(this).find('img').attr('data');
-		//console.log('fn :'+fn)
+		console.log('fn :'+fn)
 		str = 'form'+fn+'.html';
 		$('[name="cdc"]').html('');
 		$('html, body').animate({
@@ -832,11 +922,18 @@ $(document).ready(function() {
 		$('[name="cdc"]').load(str,function(){
 			setUp($(this),dados);
 		});
+
+		if(fn==4){
+			$("#btn-send").css('display','inline')
+		}else{
+			$("#btn-send").css('display','none')
+		}
 	})
 
-	$('#hub').click(function(e){
+	$('#btn').on('click','#btn-send',function(e){
 		e.preventDefault();
-		z = JSON.stringify(getFormData());
+		//z = JSON.stringify(getFormData());
+		z = getFormData();
 		console.log(z)
 		console.log('click')
 		$.ajax({
@@ -844,7 +941,8 @@ $(document).ready(function() {
 			url: 'consultant',
 			data: z,
 			success: function(data){
-			    console.log(data)
+			    //console.log(data)
+			    window.alert(data);
 			},
 			error: function(jqxhr){
 			    console.log(jqxhr)
