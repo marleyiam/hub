@@ -24,6 +24,37 @@ function jsonpWrap($jsonp) {
   return $jsonp;
 }
 
+$app->get('/consultants', function () use ($app) {
+    $mongo = "";   
+    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
+        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
+       
+    }else if($_SERVER['SERVER_NAME'] == "localhost"){
+        $mongo = new Mongo( 'mongodb://localhost:27017');
+    }else{
+        echo 'out of the headquarter o.O';
+    }
+    
+    $db = $mongo->consultantsDB;
+
+    $consultants = $db->consultants;
+    $cons = $consultants->find();
+
+    $total = $cons->count(true);
+    echo ($total) ." registros encontrados.<p>";
+    //$mongo->close();
+
+    foreach ($cons as $key => $obj) {
+        if(is_array($obj)){
+            echo $key.'</br>';
+            printer($obj);
+        }else{
+            echo $key.'   '.$obj.'</br>';
+        }
+    }
+
+});
+
 
 $app->get('/test', function () use ($app) {
     //phpinfo();
