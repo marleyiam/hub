@@ -34,8 +34,9 @@ $app->get('/test', function () use ($app) {
         echo $_SERVER['SERVER_NAME'];
     }else if($_SERVER['SERVER_NAME'] == "localhost"){
         $mongo = new Mongo( 'mongodb://localhost:27017');
+        echo 'localhost';
     }else{
-
+        echo 'other';
     }
     printer($mongo);
     $db = $mongo->consultantsDB;
