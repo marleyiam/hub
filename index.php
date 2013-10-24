@@ -91,12 +91,13 @@ $app->post('/consultant', function () use ($app) {
         }
         
         $db = $mongo->consultantsDB;
-        $consultants = $db->consultants;
+        printer($db)
+       /* $consultants = $db->consultants;
         if($consultants->insert($output)){
             echo 'Parabéns! seu cadastrado foi realizado com sucesso!';
         }else{
             echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
-        }
+        }*/
        
         /*foreach ($output as $item) {
            $consultants->insert($item);
