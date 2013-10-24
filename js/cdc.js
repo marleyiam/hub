@@ -571,7 +571,6 @@ function pos_or_edu(class_name){
     }
 }
  
-
 function getFormData(){
 
 	$ilist = $('input').not('.exclude');
