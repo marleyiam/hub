@@ -888,6 +888,9 @@ $(document).ready(function() {
 		$('[name="cdc"]').load(str,function(){
 			setUp($(this),dados);
 		});
+
+		$ant = $("#nav-top").find("ul").find("li").eq(prev-1).css({"width":"16%","height":"100%","backgroundImage":"linear-gradient(to bottom, #cf2b4f, #980021 500%)","-moz-border-radius":"50px","-webkit-border-radius":"50px","border-radius":"50px"})
+		$ant.siblings().css({"width":"16%","height":"100%","backgroundImage":"","-moz-border-radius":"0px","-webkit-border-radius":"0px","border-radius":"0px"})
 	});
 
 	/** botao avançar */
@@ -900,6 +903,9 @@ $(document).ready(function() {
 		$('[name="cdc"]').load(str,function(){
 			setUp($(this),dados);
 		})
+
+		$at = $("#nav-top").find("ul").find("li").eq(pn).css({"width":"16%","height":"100%","backgroundImage":"linear-gradient(to bottom, #cf2b4f, #980021 500%)","-moz-border-radius":"50px","-webkit-border-radius":"50px","border-radius":"50px"})
+		$at.siblings().css({"width":"16%","height":"100%","backgroundImage":"","-moz-border-radius":"0px","-webkit-border-radius":"0px","border-radius":"0px"})
 
 		if(pn==4){
 			$("#btn-send").css('display','inline')
@@ -921,6 +927,9 @@ $(document).ready(function() {
 		$('[name="cdc"]').load(str,function(){
 			setUp($(this),dados);
 		});
+
+		$(this).siblings().css({"width":"16%","height":"100%","backgroundImage":"","-moz-border-radius":"0px","-webkit-border-radius":"0px","border-radius":"0px"})
+		$(this).css({"width":"16%","height":"100%","backgroundImage":"linear-gradient(to bottom, #cf2b4f, #980021 500%)","-moz-border-radius":"50px","-webkit-border-radius":"50px","border-radius":"50px"})
 
 		if(fn==4){
 			$("#btn-send").css('display','inline')
