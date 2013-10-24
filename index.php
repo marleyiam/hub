@@ -29,8 +29,8 @@ $app->get('/test', function () use ($app) {
     //phpinfo();
    // printer($_SERVER["SERVER_SOFTWARE"]);
     printer($_SERVER['SERVER_NAME']);
-    $mongo = "";
-    if($_SERVER['SERVER_NAME'] == "http://polar-lake-2571.herokuapp.com"){
+    $mongo = "";   
+    if($_SERVER['SERVER_NAME'] == "polar-lake-2571.herokuapp.com"){
         $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
         echo $_SERVER['SERVER_NAME'];
     }else if($_SERVER['SERVER_NAME'] == "localhost"){
