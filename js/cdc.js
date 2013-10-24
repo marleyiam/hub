@@ -575,7 +575,7 @@ function pos_or_edu(class_name){
 function getFormData(){
 
 	$ilist = $('input').not('.exclude');
-	console.log($ilist)
+	//console.log($ilist)
 	ll = $ilist.length;
 	val = "";
 	obj2 = Object;
