@@ -38,7 +38,8 @@ $app->get('/test', function () use ($app) {
     }
     
     $db = $mongo->consultantsDB;
-    $consultants = $db->consultants;
+    printer($db);
+   /* $consultants = $db->consultants;
     $cons = $consultants->find();
     //printer($db);
     foreach ($cons as $obj) {
@@ -47,7 +48,7 @@ $app->get('/test', function () use ($app) {
         echo "<strong>Idade:</strong> " . $obj['age'] . "<br/>";
         echo "<br/>";
     }
-    $mongo->close();
+    $mongo->close();*/
 });
 
 $app->post('/consultant', function () use ($app) {
@@ -91,7 +92,7 @@ $app->post('/consultant', function () use ($app) {
         }
         
         $db = $mongo->consultantsDB;
-        printer($db)
+        printer($db);
        /* $consultants = $db->consultants;
         if($consultants->insert($output)){
             echo 'Parabéns! seu cadastrado foi realizado com sucesso!';
