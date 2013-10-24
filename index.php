@@ -55,6 +55,10 @@ $app->get('/consultants', function () use ($app) {
 
 });
 
+$app->get('/admin', function () use ($app) {
+       $app->render('admin.html');
+});
+
 
 $app->get('/test', function () use ($app) {
     //phpinfo();
