@@ -851,7 +851,14 @@ function cloneField(form){
 	})*/
 }
 
+function changeRadio(ref){
+	ref.on('change','input:radio',function(){
+	    getFormData();
+	})
+}
+
 function setUp(ref,dados){
+	changeRadio(ref);
 	setOpacity(ref)
 	btns(prev);
 	cloneField(ref);
@@ -927,12 +934,13 @@ $(document).ready(function() {
 		}
 	})
 
+
 	$('#btn').on('click','#btn-send',function(e){
 		e.preventDefault();
 		//z = JSON.stringify(getFormData());
 		z = getFormData();
 		console.log(z)
-		console.log('click')
+		//console.log('click')
 		$.ajax({
 			type: 'post',
 			url: 'consultant',
@@ -946,7 +954,6 @@ $(document).ready(function() {
 			}
 		})
 	})
-
 		// trigger no form1
 	   $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click');
 	   cloneField($("#nav-top").parent().parent().find('[name="cdc"]'));
