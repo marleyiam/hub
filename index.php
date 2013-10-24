@@ -30,7 +30,7 @@ $app->get('/test', function () use ($app) {
     //printer($_SERVER["SERVER_SOFTWARE"]);
     //printer($_SERVER['SERVER_NAME']);
     $mongo = "";   
-    if($_SERVER['SERVER_NAME'] == "polar-lake-2571.herokuapp.com"){
+    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
         $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
        
     }else if($_SERVER['SERVER_NAME'] == "localhost"){
@@ -87,7 +87,7 @@ $app->post('/consultant', function () use ($app) {
         //$consultantData = json_decode($output);
 
         $mongo = "";
-        if($_SERVER['SERVER_NAME'] == "polar-lake-2571.herokuapp.com"){
+        if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
             $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
         }else if($_SERVER['SERVER_NAME'] == "localhost"){
             $mongo = new Mongo( 'mongodb://localhost:27017');

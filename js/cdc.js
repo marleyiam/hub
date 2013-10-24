@@ -901,7 +901,7 @@ $(document).ready(function() {
 			setUp($(this),dados);
 		})
 
-		if(fn==4){
+		if(pn==4){
 			$("#btn-send").css('display','inline')
 		}else{
 			$("#btn-send").css('display','none')
