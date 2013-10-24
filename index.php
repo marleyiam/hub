@@ -98,7 +98,6 @@ $app->post('/consultant', function () use ($app) {
             echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
         }
        
-
         /*foreach ($output as $item) {
            $consultants->insert($item);
         }*/
@@ -106,7 +105,6 @@ $app->post('/consultant', function () use ($app) {
         //db.consult.insert({name: "nome usuario", age: 25});
         // $mongo->selectDB('consultantsDB')->selectCollection('consultants')->insert( array( 'nome' => utf8_decode($node->user->name) , 'tweet' => $node->text ) );
 });
-
 
 
 $app->get('/json', function(){
