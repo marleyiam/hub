@@ -27,22 +27,21 @@ function jsonpWrap($jsonp) {
 
 $app->get('/test', function () use ($app) {
     //phpinfo();
-   // printer($_SERVER["SERVER_SOFTWARE"]);
-    printer($_SERVER['SERVER_NAME']);
+    //printer($_SERVER["SERVER_SOFTWARE"]);
+    //printer($_SERVER['SERVER_NAME']);
     $mongo = "";   
     if($_SERVER['SERVER_NAME'] == "polar-lake-2571.herokuapp.com"){
         $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-        echo $_SERVER['SERVER_NAME'];
+       
     }else if($_SERVER['SERVER_NAME'] == "localhost"){
         $mongo = new Mongo( 'mongodb://localhost:27017');
-        echo 'localhost';
     }else{
-        echo 'other';
+        echo 'out of the headquarter o.O';
     }
-    printer($mongo);
+   
     $db = $mongo->consultantsDB;
-    printer($db);
-   /* $consultants = $db->consultants;
+
+    $consultants = $db->consultants;
     $cons = $consultants->find();
     //printer($db);
     foreach ($cons as $obj) {
@@ -51,7 +50,7 @@ $app->get('/test', function () use ($app) {
         echo "<strong>Idade:</strong> " . $obj['age'] . "<br/>";
         echo "<br/>";
     }
-    $mongo->close();*/
+    $mongo->close();
 });
 
 $app->post('/consultant', function () use ($app) {
@@ -88,20 +87,20 @@ $app->post('/consultant', function () use ($app) {
         //$consultantData = json_decode($output);
 
         $mongo = "";
-        if($_SERVER['SERVER_NAME'] == "http://polar-lake-2571.herokuapp.com"){
+        if($_SERVER['SERVER_NAME'] == "polar-lake-2571.herokuapp.com"){
             $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
         }else if($_SERVER['SERVER_NAME'] == "localhost"){
             $mongo = new Mongo( 'mongodb://localhost:27017');
         }
         
         $db = $mongo->consultantsDB;
-        printer($db);
-       /* $consultants = $db->consultants;
+        //printer($db);
+        $consultants = $db->consultants;
         if($consultants->insert($output)){
             echo 'Parabéns! seu cadastrado foi realizado com sucesso!';
         }else{
             echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
-        }*/
+        }
        
         /*foreach ($output as $item) {
            $consultants->insert($item);
