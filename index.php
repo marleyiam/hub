@@ -60,12 +60,7 @@ $app->get('/admin', function () use ($app) {
 });
 
 $app->post('/login', function () use ($app) {
-       echo 'login';
-});
-
-$app->post('/user', function () use ($app) {
-       echo 'cadastrar usuario';
-
+       $app->response()->header('Content-Type', 'application/json;charset=utf-8');
        $mongo = "";   
        if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
            $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
@@ -81,13 +76,54 @@ $app->post('/user', function () use ($app) {
 
        $data = $app->request()->params();
 
-       /*if($users->insert({"login" => $data['login'],"password" => $data['password']})){
-           echo 'Usuário cadastrado com sucesso!';
+       $pass = md5($data['password']);
+
+       $criteria = array(
+        'login' => $data['login'], 'password' => $pass
+        );
+
+       $resultado = $users->findOne($criteria);
+
+       //if (is_object($resultado) && (count(get_object_vars($resultado)) > 0)) {
+       if ($resultado){
+              $app->render('dashboard.html');
+            //echo 'rolou';
+            //printer($resultado);
        }else{
-           echo 'Não foi possível cadastrar o usuário!';
-       }*/
 
+            echo json_encode(array("msg"=>0));
+            //echo 'nao rolou';
+            //printer($resultado);
+       }
+});
 
+$app->post('/user', function () use ($app) {
+    $mongo = "";   
+    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
+        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
+       
+    }else if($_SERVER['SERVER_NAME'] == "localhost"){
+        $mongo = new Mongo( 'mongodb://localhost:27017');
+    }else{
+        echo 'out of the headquarter o.O';
+    }
+    
+    $db = $mongo->consultantsDB;
+    $users = $db->users;
+
+    $data = $app->request()->params();
+
+    $pass = md5($data['password']);
+
+    $criteria = array(
+     'login' => $data['login'], 'password' => $pass
+     );
+
+    if($users->insert($criteria)){
+        echo 'usuario cadastrado!';
+    }else{
+        echo 'nem';
+    }
 });
 
 

@@ -8,8 +8,14 @@ $(document).ready(function(){
 	    $.ajax({
 	        type: 'post',
 	        url: 'login',
+	        data: {login:login,password:pass},
 	        success: function(data){
 	            console.log(data)
+	            if(data.msg==0){
+	            	$(".alert-error").css("display","block")
+	            }else{
+
+	            }
 	        },
 	        error: function(jqxhr){
 	            console.log(jqxhr)
