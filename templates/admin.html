@@ -47,10 +47,14 @@
     <div class="row ">
         <div class="center span4 well">
             <legend>Login Administrativo</legend>
-            <div class="alert alert-error" style="display:none">
-                <a class="close" data-dismiss="alert" href="#">×</a>Não foi possível logar no sistema!
-            </div>
-            <form method="POST" action="" accept-charset="UTF-8">
+            <?php 
+            if(isset($flash['error'])){ ?>
+              <div class="alert alert-error">
+                  <a class="close" data-dismiss="alert" href="#">×</a><?php echo($flash['error'])?>
+              </div>
+            <?php }
+            ?>
+            <form method="POST" action="login" accept-charset="UTF-8">
             <input type="text" id="login" class="span4" name="login" placeholder="Login" required/>
             <input type="password" id="password" class="span4" name="password" placeholder="Senha" required/>
             <label class="checkbox">

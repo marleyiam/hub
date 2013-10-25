@@ -95,57 +95,6 @@ function lastIndexOf($string,$item){
         return -1;  
 }
 
-function from_camel_case($input) {
-  preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
-  $ret = $matches[0];
-  foreach ($ret as &$match) {
-    $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
-  }
-  return implode('_', $ret);
-}
-
-function to_camel_case($str, $capitalise_first_char = true) {
-   if($capitalise_first_char) {
-     $str[0] = strtoupper($str[0]);
-   }
-   $func = create_function('$c', 'return strtoupper($c[1]);');
-   return preg_replace_callback('/_([a-z])/', $func, $str);
- }
-
-function relation($entity,$relation,$find){
-//$user['imagens'] = relation(array("Local",$user['locals']),"LocalPicture","identifier");
-	$data = array();
-	$findby = 'find_by_'.$find;
-	$get_relation = Inflect::pluralize(strtolower(from_camel_case($relation)));
-
-	foreach ($entity[1] as $key => $value) {	
-		$data[$key] = $value->$get_relation;
-	}
-
-	return $data;
-}
-
-function get_nested_relation($obj,$relation){
-	$data = array();
-	$entity = Inflect::singularize(to_camel_case($relation));
-
-	foreach ($obj as $key => $value) {
-	   $data[$key] = $value->$relation;
-	}
-
-	return $data;
-}
-
-function get_resource_relation($obj,$relation,$fk){
-	$data = array();
-	$entity = Inflect::singularize(to_camel_case($relation));
-
-	foreach ($obj as $key => $value) {
-	   $data[$key] = $value->$relation? $value->$relation : array(new $entity(array("id"=>100,"name"=>"no_picture.gif",$fk=>$value->id)));
-	}
-
-	return $data;
-}
 
 function make_date_select($param){
 	
@@ -182,7 +131,7 @@ function make_date_select($param){
 
 function current_user(){
 	if(isset($_SESSION['user_id'])){
-		return User::find_by_id($_SESSION['user_id']);
+		//return User::find_by_id($_SESSION['user_id']);
 	}
 }
 
