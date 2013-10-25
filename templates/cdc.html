@@ -15,7 +15,6 @@ dados = (Object)
 </script>
 
 <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-//api_key: bigz9r7qx5wl
   api_key: cmhswgueglgb
   onLoad: onLinkedInLoad
   authorize: true
@@ -25,22 +24,9 @@ dados = (Object)
 
 <script type="text/javascript">
 
-  /*function logout(){
-    IN.User.logout(onLinkedInLogout);
-    //N.User.logout(callbackFunction, callbackScope)
-    //IN.User.logout() 
-  }
-
-  function onLinkedInLogout(){
-    window.location = window.location.href;
-  }*/
-
   function onLinkedInLoad() {
     IN.Event.on(IN, "auth", onLinkedInAuth);
-    //IN.UI.Authorize().params({"scope":["r_fullprofile","r_basicprofile","r_emailaddress","r_contactinfo"]}).place();
   }
-
-//location:(country:(code))
 
   function onLinkedInAuth() {
     IN.API.Profile("me").fields('id','first-name','last-name','main-address','headline','location:(name,country:(code))','industry','summary','specialties','positions','picture-url','public-profile-url','email-address','associations','interests','languages','publications','patents','skills','certifications','educations','courses','date-of-birth','phone-numbers','bound-account-types','im-accounts','twitter-accounts','primary-twitter-account').result(displayProfiles);
@@ -103,22 +89,6 @@ dados = (Object)
         	<form name="cdc" action="cdc.xxx" method="get">
 <!-- Corpo do cadastro portugues-->
                 <script>
-                /*$('[name="cdc"]').load('form1.html',function(){
-                    $pt = $(this).find('[id^="pt"]');
-                    $en = $(this).find('[id^="en"]');
-
-                    $pt.on('focus','input',function(){
-                        $pt.css('opacity','1');
-                        $en.css('opacity','0.5');
-                    })
-
-                    $en.on('focus','input',function(){
-                        $en.css('opacity','1');
-                        $pt.css('opacity','0.5');
-                    })
-
-                    btns(1)
-                });*/
                 $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click')
                 </script>
          	</form>

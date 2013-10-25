@@ -23,4 +23,18 @@ $(document).ready(function(){
 	    })
 	})*/
 
+/*
+$.ajax({
+    type: 'post',
+    url: 'user',
+    data: {login:"admin",password:"e0licas2013"},
+    success: function(data){
+        console.log(data)
+    },
+    error: function(jqxhr){
+        console.log(jqxhr)
+    }
+})
+*/
+
 });

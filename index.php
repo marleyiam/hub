@@ -23,6 +23,7 @@ $app->get('/', function () use ($app) {
   }
   return $jsonp;
 }*/
+
 $authenticate = function ($app) {
     return function () use ($app) {
         if (!isset($_SESSION['user_id'])) {
@@ -101,6 +102,7 @@ $app->post('/login', function () use ($app) {
        //if (is_object($resultado) && (count(get_object_vars($resultado)) > 0)) {
        if ($resultado){
             $_SESSION['user_id'] = $resultado['_id'];
+            $_SESSION['user_login'] = $resultado['login'];
                 $app->flash('success', 'Você está logado !');
                 $app->redirect(get_root_url().'dashboard');
        }else{
