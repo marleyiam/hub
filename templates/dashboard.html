@@ -103,7 +103,9 @@ if(isset($flash['success'])){ ?>
                         foreach ($consultores as $key => $cons) { ?>
                             
                             <tr>
-                                <td class="primary"><?php echo $cons['name']?></td>
+                                <td class="primary">
+                                  <?php echo $cons['name']?>&nbsp;<?php echo $cons['last-name']?>
+                                </td>
                                 <td>87%</td>
                                 <td>
                                   <div class="progress progress-mini">
