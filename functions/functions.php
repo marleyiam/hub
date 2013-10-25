@@ -217,4 +217,39 @@ function json_validate($json, $assoc_array = FALSE){
     return $result;
 }
 
+function createId( $yourTimestamp ){
+    static $inc = 0;
+
+    $ts = pack( 'N', $yourTimestamp );
+    $m = substr( md5( gethostname()), 0, 3 );
+    $pid = pack( 'n', posix_getpid() );
+    $trail = substr( pack( 'N', $inc++ ), 1, 3);
+
+    $bin = sprintf("%s%s%s%s", $ts, $m, $pid, $trail);
+
+    $id = '';
+    for ($i = 0; $i < 12; $i++ )
+    {
+        $id .= sprintf("%02X", ord($bin[$i]));
+    }
+    return new MongoID($id);
+}
+/*
+
+t = "526adafec2f4a11f08d63af1";
+//new Date(parseInt(t.toString().slice(0,8), 16)*1000);
+
+i = parseInt(t.slice(0,8), 16)*1000;
+
+new Date(i)
+
+	$t = "526adafec2f4a11f08d63af1";
+
+$t3 = substr($t, 0, 8);
+
+
+print_r(date("d/m/Y G:i:s", intval(hexdec($t)*1000)));
+*/
+
+
 ?>
