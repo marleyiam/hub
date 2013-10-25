@@ -71,7 +71,26 @@ $app->get('/admin', function () use ($app) {
 });
 
 $app->get('/dashboard', $authenticate($app), function () use ($app) {
-       $app->render('dashboard.html');
+    $consultores['consultores'] = "";
+    $consultores['total'] = "";
+    $mongo = "";   
+    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
+        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
+       
+    }else if($_SERVER['SERVER_NAME'] == "localhost"){
+        $mongo = new Mongo( 'mongodb://localhost:27017');
+    }else{
+        echo 'out of the headquarter o.O';
+    }
+    
+    $db = $mongo->consultantsDB;
+
+    $consultants = $db->consultants;
+
+    $consultores['consultores'] = $consultants->find();
+    $consultores['total'] = $consultores['consultores']->count(true);
+
+    $app->render('dashboard.html',$consultores);
 });
 
 $app->post('/login', function () use ($app) {
@@ -170,10 +189,11 @@ $app->get('/test', function () use ($app) {
     $consultants = $db->consultants;
     $cons = $consultants->find();
     //printer($db);
+    //printer($cons);
     foreach ($cons as $obj) {
         echo $obj['_id'] ."<br/>";
         echo "<strong>Nome:</strong> " . $obj['name'] . "<br/>";
-        echo "<strong>Idade:</strong> " . $obj['age'] . "<br/>";
+        
         echo "<br/>";
     }
     $mongo->close();

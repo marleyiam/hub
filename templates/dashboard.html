@@ -78,7 +78,7 @@ if(isset($flash['success'])){ ?>
                   </header>
                   <div class="row-fluid">
                     <div class="span12">
-                        <div class="kpi count_consult">8</div>
+                        <div class="kpi count_consult"><?php echo $total?></div>
                         <div><small>total de consultores cadastrados</small></div>
                     </div>
                   </div>
@@ -99,7 +99,28 @@ if(isset($flash['success'])){ ?>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <?php 
+                        foreach ($consultores as $key => $cons) { ?>
+                            
+                            <tr>
+                                <td class="primary"><?php echo $cons['name']?></td>
+                                <td>87%</td>
+                                <td>
+                                  <div class="progress progress-mini">
+                                    <div class="bar" style="width: 35%"></div>
+                                  </div>
+                                </td>
+                                <td>Sim</td>
+                                <td>Dezembro 15, 2012</td>
+                                <td>
+                                  <div class="pull-left">
+                                    <a class="btn btn-small">Editar</a>
+                                    <a class="btn btn-small">Excluir</a>
+                                  </div>
+                                </td>
+                            </tr>
+                        <?php }?>
+                      <!--<tr>
                         <td class="primary">Marley Ferreira</td>
                         <td>87%</td>
                         <td>
@@ -200,7 +221,7 @@ if(isset($flash['success'])){ ?>
                               <a class="btn btn-small">Excluir</a>
                           </div>
                         </td>
-                      </tr>
+                      </tr>-->
                     </tbody>
                   </table>
                 </section>
