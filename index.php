@@ -23,7 +23,6 @@ $app->get('/', function () use ($app) {
   }
   return $jsonp;
 }*/
-cors();
 
 $authenticate = function ($app) {
     return function () use ($app) {

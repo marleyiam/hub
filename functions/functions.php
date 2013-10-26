@@ -234,22 +234,21 @@ function createId( $yourTimestamp ){
     }
     return new MongoID($id);
 }
-/*
 
+/*
 t = "526adafec2f4a11f08d63af1";
 //new Date(parseInt(t.toString().slice(0,8), 16)*1000);
-
 i = parseInt(t.slice(0,8), 16)*1000;
-
 new Date(i)
-
-	$t = "526adafec2f4a11f08d63af1";
-
-$t3 = substr($t, 0, 8);
-
-
-print_r(date("d/m/Y G:i:s", intval(hexdec($t)*1000)));
 */
+
+function dateId($_id){
+	//$t1 = intval(substr(hexdec(substr($_id, 0, 8))*1000, 0, 10));
+	//$t2 = new DateTime( date("d-m-Y H:i:s",$t1));
+	//return $t2->format("d-m-Y H:i:s");
+	$data = new DateTime(date("d-m-Y H:i:s",intval(substr(hexdec(substr($_id, 0, 8))*1000, 0, 10))));
+	return $data->format("d-m-Y H:i:s");
+}
 
 
 ?>
