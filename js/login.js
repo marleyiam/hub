@@ -37,4 +37,32 @@ $.ajax({
 })
 */
 
+/*
+str = window.location.href
+tk = str.lastIndexOf("/")
+root = str.substr(0,tk)
+
+$(".table-striped").on('click','.consultant_row',function(e){
+    e.preventDefault();
+    _id = $(this).attr('data-id');
+    
+    $.ajax({
+        type: 'get',
+        url: root+'/consultants/'+_id,
+        success: function(data){
+             console.log(data)
+        },
+        error: function(jqxhr){
+            //console.log(jqxhr)
+        },
+        statusCode: function(jqXHR) {
+               console.log(jqXHR)
+        },
+        complete: function(xmlHttp) {
+            // xmlHttp is a XMLHttpRquest object
+            //console.log(xmlHttp);
+         }
+    })
+})*/
+
 });

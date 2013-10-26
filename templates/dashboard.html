@@ -104,7 +104,7 @@ if(isset($flash['success'])){ ?>
                             
                             <tr>
                                 <td class="primary">
-                                  <?php echo $cons['name']?>&nbsp;<?php echo $cons['last-name']?>
+                                  <a class="consultant_row "href="view_consultant/<?=$cons['_id']?>" data-id="<?=$cons['_id']?>"><?php echo $cons['name']?>&nbsp;<?php echo $cons['last-name']?></a>
                                 </td>
                                 <td>87%</td>
                                 <td>
@@ -234,5 +234,6 @@ if(isset($flash['success'])){ ?>
 </div><!-- /container -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

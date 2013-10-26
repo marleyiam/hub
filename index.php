@@ -23,6 +23,7 @@ $app->get('/', function () use ($app) {
   }
   return $jsonp;
 }*/
+cors();
 
 $authenticate = function ($app) {
     return function () use ($app) {
@@ -64,6 +65,40 @@ $app->get('/consultants', function () use ($app) {
 
     $mongo->close();
 
+});
+
+/*$app->get('/consultants/(:id)', $authenticate($app), function($id) use ($app){ 
+      if($app->request->isAjax()){
+        //echo $app->request->isAjax();
+        //$app->redirect('consultant.html');
+        $app->redirect('/view_consultant/'+1);
+        //$app->render('consultant.html');
+        //$req = $app->request;
+        //printer($req->getReferrer());
+       // $app->response->setStatus(400);
+        //$app->response->redirect('/view_consultant/'+1);
+        //$app->request->redirect('/view_consultant/'+1); 
+      } 
+});*/
+
+$app->get('/view_consultant/(:id)', $authenticate($app), function($id) use ($app){
+  $mongo = "";   
+  if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
+      $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
+     
+  }else if($_SERVER['SERVER_NAME'] == "localhost"){
+      $mongo = new Mongo( 'mongodb://localhost:27017');
+  }else{
+      echo 'out of the headquarter o.O';
+  }
+  
+  $db = $mongo->consultantsDB;
+  //echo $id;
+  $consultants = $db->consultants;
+  $consultor['consultor'] = $consultants->findOne(array('_id' => new MongoId($id)));
+  //printer($consultor);
+
+  $app->render('consultant.html',$consultor);
 });
 
 $app->get('/admin', function () use ($app) {
@@ -218,6 +253,16 @@ $app->post('/consultant', function () use ($app) {
             echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
         }
         $mongo->close();
+});
+
+
+$app->error(function (\Exception $e) use ($app) {
+    $app->render('error.html');
+});
+
+
+$app->notFound(function () use ($app) {
+    $app->render('404.html');
 });
 
 
