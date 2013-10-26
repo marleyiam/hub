@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+
+    $('.nav-tabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+
 	//window.alert('hey!')
 	/*$('[name="submit"]').click(function(e){
 	    e.preventDefault();

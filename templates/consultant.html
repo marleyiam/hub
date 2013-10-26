@@ -82,21 +82,34 @@
                   <div class="sub-header">
                     <h2></h2>
                   </div>
-                  <table class="table table-striped full-section table-hover">
 
-                    <tbody>
-   
-    <tr>
-      <td>Nome </td><td><?=$consultor['nome']?></td>
-    </tr>
-                                <!--<td>
-                                  <div class="pull-left">
-                                    <a class="btn btn-small">Editar</a>
-                                    <a class="btn btn-small">Excluir</a>
-                                  </div>
-                                </td>-->
-                    </tbody>
-                  </table>
+                  <ul class="nav nav-tabs">
+                    <li><a href="#portugues" data-toggle="tab">Português</a></li>
+                    <li><a href="#ingles" data-toggle="tab">Inglês</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="portugues">
+                        <table class="table table-striped full-section table-hover">
+                          <tbody>
+                            <tr>
+                              <td>Nome </td><td><?=$consultor['nome']?></td>
+                            </tr>
+                                                  <!--<td>
+                                                    <div class="pull-left">
+                                                      <a class="btn btn-small">Editar</a>
+                                                      <a class="btn btn-small">Excluir</a>
+                                                    </div>
+                                                  </td>-->
+                          </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="ingles">
+
+                    </div>
+                  </div>
+
                 </section>
 
             </div>
@@ -105,5 +118,6 @@
 </div><!-- /container -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/login.js"></script>
   </body>
 </html>
