@@ -93,20 +93,129 @@
                         <table class="table table-striped full-section table-hover">
                           <tbody>
                             <tr>
-                              <td>Nome </td><td><?=$consultor['nome']?></td>
+                              <td><big><strong>Nome</big></strong></td><td><big><i><?=$consultor['nome']?></i></big></td>
                             </tr>
-                                                  <!--<td>
-                                                    <div class="pull-left">
-                                                      <a class="btn btn-small">Editar</a>
-                                                      <a class="btn btn-small">Excluir</a>
-                                                    </div>
-                                                  </td>-->
+                            <tr>
+                              <td><big><strong>Sobrenomenome meio</big></strong></td><td><big><i><?=$consultor['sobrenomenome-meio']?></i></big></td>
+                            </tr>
+                            <tr>
+                              <td><big><strong>Sobrenomenome último</big></strong></td><td><big><i><?=$consultor['sobrenomenome-ultimo']?></i></big></td>
+                            </tr>
+                            <tr>
+                              <td><big><strong>Nome notório</big></strong></td><td><big><i><?=$consultor['nome-notorio']?></i></big></td>
+                            </tr>
+                            <tr>
+                              <td><big><strong>Logradouro</big></strong></td><td><big><i><?=$consultor['logradouro']?></i></big></td>
+                            </tr>
+                            <tr>
+                              <td><big><strong>Estado</big></strong></td><td><big><i><?=$consultor['estado']?></i></big></td>
+                            </tr>
+                            <tr>
+                              <td><big><strong>CEP</big></strong></td><td><big><i><?=$consultor['cep']?></i></big></td>
+                            </tr>
+                            <tr>
+                              <td><big><strong>País</big></strong></td><td><big><i><?=$consultor['pais']?></i></big></td>
+                            </tr>
+                            <tr class="mail">
+                                <td>
+                                    <big><strong>e-Mail :</big></strong></br>
+                                    <ul style="list-style-type:none">
+                                
+                                        <?php
+                                        foreach ($consultor['mails'] as $key => $mail) {
+
+                                            if($mail['emailAddress']!=""){ ?>
+                                            <fieldset class="fieldset li">
+                                                <li><strong>endereço : </strong><i><?php echo $mail['emailAddress']?></i></li>
+                                                <li><strong>tipo : </strong><i><?php echo $mail['emailType']?></i></li>
+                                            </fieldset>
+                                           <?php }} ?>
+                                    </ul>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <tr class="mail">
+                                <td>
+                                    <big><strong>Fones :</big></strong></br>
+                                    <ul style="list-style-type:none">
+                                
+                                        <?php
+                                        foreach ($consultor['phones'] as $key => $mail) {
+
+                                            if($mail['phoneNumer']!=""){ ?>
+                                            <fieldset class="fieldset li">
+                                                <li><strong>Número : </strong><i><?php echo $mail['phoneNumer']?></i></li>
+                                                <li><strong>tipo : </strong><i><?php echo $mail['phoneType']?></i></li>
+                                            </fieldset>
+                                           <?php }} ?>
+                                    </ul>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <tr class="academico">
+                                <td>
+                                    <big><strong>Academico :</big></strong></br>
+                                    <ul style="list-style-type:none">
+                                
+                                        <?php
+                                        foreach ($consultor['educations'] as $key => $mail) {
+
+                                            if($mail['schoolName']!="" && $mail['type']=="academico"){ ?>
+                                            <fieldset class="fieldset li">
+                                                <li><strong>nome : </strong><i><?php echo $mail['schoolName']?></i></li>
+                                                <li><strong>endereço : </strong><i><?php echo $mail['local']?></i></li>
+                                                <li><strong>Início : </strong><i><?php echo $mail['startDate']?></i></li>
+                                                <li><strong>Fim : </strong><i><?php echo $mail['endDate']?></i></li>
+                                                <li><strong>Tipo de estudo : </strong><i><?php echo $mail['activities']?></i></li>
+                                                <li><strong>Título : </strong><i><?php echo $mail['degree']?></i></li>
+                                            </fieldset>
+                                           <?php }} ?>
+                                    </ul>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <tr class="profissional">
+                                <td>
+                                    <big><strong>Profissional :</big></strong></br>
+                                    <ul style="list-style-type:none">
+                                
+                                        <?php
+                                        foreach ($consultor['positions'] as $key => $mail) {
+
+                                            if($mail['companyName']!="" && $mail['type']=="trab-atual"){ ?>
+                                            <fieldset class="fieldset multiple">
+                                                <legend><small>Atual</small></legend>
+                                                <li><strong>nome : </strong><i><?php echo $mail['companyName']?></i></li>
+                                                <li><strong>Início : </strong><i><?php echo $mail['startDate']?></i></li>
+                                                <li><strong>Fim : </strong><i><?php echo $mail['endDate']?></i></li>
+                                                <li><strong>Tipo de negócio : </strong><i><?php echo $mail['industry']?></i></li>
+                                                <li><strong>Descrição : </strong><i><?php echo $mail['summary']?></i></li>
+                                            </fieldset>
+                                           <?php }elseif($mail['companyName']!="" && $mail['type']=="trab-anterior") {?>
+                                       
+                                            <fieldset class="fieldset multiple">
+                                                <li><strong>nome : </strong><i><?php echo $mail['companyName']?></i></li>
+                                                <li><strong>Início : </strong><i><?php echo $mail['startDate']?></i></li>
+                                                <li><strong>Fim : </strong><i><?php echo $mail['endDate']?></i></li>
+                                                <li><strong>Tipo de negócio : </strong><i><?php echo $mail['industry']?></i></li>
+                                                <li><strong>Descrição : </strong><i><?php echo $mail['summary']?></i></li>
+                                            </fieldset>
+                                              
+                                           <?php }
+
+                                       } ?>
+                                    </ul>
+                                </td>
+                                <td></td>
+                            </tr>
+
                           </tbody>
                         </table>
                     </div>
-
                     <div class="tab-pane" id="ingles">
-
                     </div>
                   </div>
 
