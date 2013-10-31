@@ -70,5 +70,4 @@ $(".table-striped").on('click','.consultant_row',function(e){
          }
     })
 })*/
-
 });
