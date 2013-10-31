@@ -267,5 +267,4 @@ function mongoId($_id){
 	}
 	return false;
 }
-
 ?>
