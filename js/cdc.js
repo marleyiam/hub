@@ -574,7 +574,8 @@ function getFormData(){
 		      	        objConsultor[$el.attr('name')] = $el.val();
 		      	  	}else{		    
 		      	  	    if(objConsultor[$el.attr('name')]==""){
-		      	  	       objConsultor[$el.attr('name')] = "null";   
+		      	  	       //objConsultor[$el.attr('name')] = "null";   
+		      	  	       objConsultor[$el.attr('name')] = " ";   
 		      	  	    }
 		      	  	}
 		    }else{
