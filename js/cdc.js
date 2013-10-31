@@ -567,9 +567,6 @@ function getFormData(){
 			/** radio buttons checkados */
 		    if($el.is(':radio')){
 
-		    	/*if($el.is(':checked')){
-		    		objConsultor[$el.attr('name')] = $el.val();
-		      	}*/
 		      		if($el.is(':checked')){
 		      	        objConsultor[$el.attr('name')] = $el.val();
 		      	  	}else{		    

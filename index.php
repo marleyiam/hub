@@ -6,13 +6,29 @@ date_default_timezone_set("America/Fortaleza");
 
 \Slim\Slim::registerAutoloader();
 
-
 $app = new \Slim\Slim();
 
 session_start();
+
+
+$mongo = "";  
+if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
+    $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
+   
+}else if($_SERVER['SERVER_NAME'] == "localhost"){
+    $mongo = new Mongo( 'mongodb://localhost:27017');
+}else{
+    echo 'out of the headquarters o.O';
+}
+
+$db = $mongo->consultantsDB;
+
+
 $app->get('/', function () use ($app) {
     $app->render('cdc.html');
 });
+
+
 
 /*function jsonpWrap($jsonp) {
   $app = Slim::getInstance();
@@ -33,18 +49,22 @@ $authenticate = function ($app) {
     };
 };
 
-$app->get('/consultants', function () use ($app) {
-    $mongo = "";   
-    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-       
-    }else if($_SERVER['SERVER_NAME'] == "localhost"){
-        $mongo = new Mongo( 'mongodb://localhost:27017');
-    }else{
-        echo 'out of the headquarter o.O';
-    }
-    
-    $db = $mongo->consultantsDB;
+
+
+$app->get('/(:obj)', $authenticate($app), function ($obj) use ($app,$db) {
+
+      $consultants = $db->consultants;
+      $cons['cons'] = $consultants->findOne(array('_id' => new MongoId($obj)));
+      if($cons){
+        $app->render('cdc.html',$cons);
+      }else{
+        //$app->render('404.html');
+      } 
+
+})->conditions(['obj' => '[0-9a-z]{24}']);
+
+
+$app->get('/consultants', function () use ($app,$db) {
 
     $consultants = $db->consultants;
     $cons = $consultants->find();
@@ -52,7 +72,6 @@ $app->get('/consultants', function () use ($app) {
     $total = $cons->count(true);
     echo ($total) ." registros encontrados.<p>";
     //$mongo->close();
-
     foreach ($cons as $key => $obj) {
         if(is_array($obj)){
             echo $key.'</br>';
@@ -61,9 +80,7 @@ $app->get('/consultants', function () use ($app) {
             echo $key.'   '.$obj.'</br>';
         }
     }
-
     $mongo->close();
-
 });
 
 /*$app->get('/consultants/(:id)', $authenticate($app), function($id) use ($app){ 
@@ -80,23 +97,10 @@ $app->get('/consultants', function () use ($app) {
       } 
 });*/
 
-$app->get('/view_consultant/(:id)', $authenticate($app), function($id) use ($app){
-  $mongo = "";   
-  if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-      $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-     
-  }else if($_SERVER['SERVER_NAME'] == "localhost"){
-      $mongo = new Mongo( 'mongodb://localhost:27017');
-  }else{
-      echo 'out of the headquarter o.O';
-  }
-  
-  $db = $mongo->consultantsDB;
-  //echo $id;
+$app->get('/view_consultant/(:id)', $authenticate($app), function($id) use ($app,$db){
+
   $consultants = $db->consultants;
   $consultor['consultor'] = $consultants->findOne(array('_id' => new MongoId($id)));
-  //printer($consultor);
-
   $app->render('consultant.html',$consultor);
 });
 
@@ -104,46 +108,21 @@ $app->get('/admin', function () use ($app) {
        $app->render('admin.html');
 });
 
-$app->get('/dashboard', $authenticate($app), function () use ($app) {
+$app->get('/dashboard', $authenticate($app), function () use ($app,$db) {
     $consultores['consultores'] = "";
     $consultores['total'] = "";
-    $mongo = "";   
-    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-       
-    }else if($_SERVER['SERVER_NAME'] == "localhost"){
-        $mongo = new Mongo( 'mongodb://localhost:27017');
-    }else{
-        echo 'out of the headquarter o.O';
-    }
-    
-    $db = $mongo->consultantsDB;
 
     $consultants = $db->consultants;
-
     $consultores['consultores'] = $consultants->find();
     $consultores['total'] = $consultores['consultores']->count(true);
 
     $app->render('dashboard.html',$consultores);
 });
 
-$app->post('/login', function () use ($app) {
+$app->post('/login', function () use ($app,$db) {
        
-       $mongo = "";   
-       if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-           $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-          
-       }else if($_SERVER['SERVER_NAME'] == "localhost"){
-           $mongo = new Mongo( 'mongodb://localhost:27017');
-       }else{
-           echo 'out of the headquarter o.O';
-       }
-       
-       $db = $mongo->consultantsDB;
        $users = $db->users;
-
        $data = $app->request()->params();
-
        $pass = md5($data['password']);
 
        $criteria = array(
@@ -172,22 +151,10 @@ $app->get('/logout', function () use ($app) {
     $app->redirect(get_root_url().'admin');
 });
 
-$app->post('/user', function () use ($app) {
-    $mongo = "";   
-    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-       
-    }else if($_SERVER['SERVER_NAME'] == "localhost"){
-        $mongo = new Mongo( 'mongodb://localhost:27017');
-    }else{
-        echo 'out of the headquarter o.O';
-    }
-    
-    $db = $mongo->consultantsDB;
+$app->post('/user', function () use ($app,$db) {
+
     $users = $db->users;
-
     $data = $app->request()->params();
-
     $pass = md5($data['password']);
 
     $criteria = array(
@@ -204,26 +171,14 @@ $app->post('/user', function () use ($app) {
 
 
 
-$app->get('/test', function () use ($app) {
+$app->get('/test', function () use ($app,$db) {
     //phpinfo();
     //printer($_SERVER["SERVER_SOFTWARE"]);
     //printer($_SERVER['SERVER_NAME']);
-    $mongo = "";   
-    if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-        $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-       
-    }else if($_SERVER['SERVER_NAME'] == "localhost"){
-        $mongo = new Mongo( 'mongodb://localhost:27017');
-    }else{
-        echo 'out of the headquarter o.O';
-    }
-   
-    $db = $mongo->consultantsDB;
 
     $consultants = $db->consultants;
     $cons = $consultants->find();
-    //printer($db);
-    //printer($cons);
+
     foreach ($cons as $obj) {
         echo $obj['_id'] ."<br/>";
         echo "<strong>Nome:</strong> " . $obj['name'] . "<br/>";
@@ -233,18 +188,9 @@ $app->get('/test', function () use ($app) {
     $mongo->close();
 });
 
-$app->post('/consultant', function () use ($app) {
+$app->post('/consultant', function () use ($app,$db) {
 
         $output = $app->request()->params();
-
-        $mongo = "";
-        if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
-            $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-        }else if($_SERVER['SERVER_NAME'] == "localhost"){
-            $mongo = new Mongo( 'mongodb://localhost:27017');
-        }
-        
-        $db = $mongo->consultantsDB;
         $consultants = $db->consultants;
         if($consultants->insert($output)){
             echo 'Parabéns! seu cadastrado foi realizado com sucesso!';

@@ -250,5 +250,22 @@ function dateId($_id){
 	return $data->format("d-m-Y H:i:s");
 }
 
+function mongoId($_id){
+
+	$regex = '/^[0-9a-z]{24}$/';
+
+	if (class_exists("MongoId")){
+	    $tmp = new MongoId($_id);
+	    if ($tmp->{'$id'} == $_id){
+	        return true;
+	    }
+	    return false;
+	}
+
+	if (preg_match($regex, $this->id)){
+	    return true;
+	}
+	return false;
+}
 
 ?>

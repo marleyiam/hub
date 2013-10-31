@@ -65,7 +65,6 @@
                 <section id="stats">
                   <header>
                     <div class="pull-right">
-                        <!--<<a class="btn btn-small">Editar</a>-->
                         <a href="../dashboard" class="btn btn-small">Voltar</a>
                     </div>
                     <h1>Consultor</h1>
@@ -74,6 +73,10 @@
                     <div class="span12">
                         <div class="kpi count_consult"></div>
                         <div><small>Dados do consultor</small></div>
+                        <div class="pull-right">
+                            <a href="../<?=$consultor['_id']?>" class="btn btn-small">editar</a>
+                            <a id="delete-cons" data-id="<?=$consultor['_id']?>" class="btn btn-small">excluir</a>
+                        </div>
                     </div>
                   </div>
                 </section>
