@@ -45,7 +45,7 @@ $authenticate = function ($app) {
 };
 
 
-$app->get('/(:obj)', $authenticate($app), function ($obj) use ($app,$db) {
+/*$app->get('/(:obj)', $authenticate($app), function ($obj) use ($app,$db) {
       $consultants = $db->consultants;
       $cons['cons'] = $consultants->findOne(array('_id' => new MongoId($obj)));
       if($cons){
@@ -53,7 +53,7 @@ $app->get('/(:obj)', $authenticate($app), function ($obj) use ($app,$db) {
       }else{
         //$app->render('404.html');
       } 
-})->conditions(['obj' => '[0-9a-z]{24}']);
+})->conditions(['obj' => '[0-9a-z]{24}']);*/
 
 
 $app->get('/consultants', function () use ($app,$db) {
