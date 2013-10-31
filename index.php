@@ -13,7 +13,6 @@ session_start();
 $mongo = "";  
 if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
     $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
-   
 }else if($_SERVER['SERVER_NAME'] == "localhost"){
     $mongo = new Mongo('mongodb://localhost:27017');
 }else{
@@ -45,16 +44,16 @@ $authenticate = function ($app) {
     };
 };
 
-
+/*
 $app->get('/(:obj)', $authenticate($app), function ($obj) use ($app,$db) {
       $consultants = $db->consultants;
       $cons['cons'] = $consultants->findOne(array('_id' => new MongoId($obj)));
       if($cons){
-        $app->render('cdc.html',$cons);
+          $app->render('cdc.html',$cons);
       }else{
         //$app->render('404.html');
       } 
-})->conditions(['obj' => '[0-9a-z]{24}']);
+})->conditions(['obj' => '[0-9a-z]{24}']);*/
 
 
 $app->get('/consultants', function () use ($app,$db) {
@@ -126,15 +125,15 @@ $app->post('/login', function () use ($app,$db) {
 
        //if (is_object($resultado) && (count(get_object_vars($resultado)) > 0)) {
     if ($resultado){
-         $_SESSION['user_id'] = $resultado['_id'];
-         $_SESSION['user_login'] = $resultado['login'];
-             $app->flash('success', 'Você está logado !');
-             $app->redirect(get_root_url().'dashboard');
+        $_SESSION['user_id'] = $resultado['_id'];
+        $_SESSION['user_login'] = $resultado['login'];
+        $app->flash('success', 'Você está logado !');
+        $app->redirect(get_root_url().'dashboard');
     }else{
          //$app->response()->header('Content-Type', 'application/json;charset=utf-8');
          //echo json_encode(array("msg"=>0));
-     $app->flash('error', 'Não foi possível logar no sistema');
-     $app->redirect(get_root_url().'admin');
+        $app->flash('error', 'Não foi possível logar no sistema');
+        $app->redirect(get_root_url().'admin');
     }
     $mongo->close();
 });
@@ -152,8 +151,8 @@ $app->post('/user', function () use ($app,$db) {
     $pass = md5($data['password']);
 
     $criteria = array(
-     'login' => $data['login'], 'password' => $pass
-     );
+      'login' => $data['login'], 'password' => $pass
+    );
 
     if($users->insert($criteria)){
         echo 'usuario cadastrado!';
