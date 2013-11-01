@@ -71,7 +71,7 @@ $app->get('/consultants', function () use ($app,$db) {
             echo $key.'   '.$obj.'</br>';
         }
     }
-    $mongo->close();
+    //$mongo->close();
 });
 
 /*$app->get('/consultants/(:id)', $authenticate($app), function($id) use ($app){ 
@@ -135,7 +135,7 @@ $app->post('/login', function () use ($app,$db) {
         $app->flash('error', 'Não foi possível logar no sistema');
         $app->redirect(get_root_url().'admin');
     }
-    $mongo->close();
+    //$mongo->close();
 });
 
 
@@ -159,7 +159,7 @@ $app->post('/user', function () use ($app,$db) {
     }else{
         echo 'nem';
     }
-    $mongo->close();
+    //$mongo->close();
 });
 
 
@@ -177,7 +177,7 @@ $app->get('/test', function () use ($app,$db) {
         
         echo "<br/>";
     }
-    $mongo->close();
+    //$mongo->close();
 });
 
 
@@ -189,7 +189,20 @@ $app->post('/consultant', function () use ($app,$db) {
     }else{
         echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
     }
-    $mongo->close();
+    //$mongo->close();
+});
+
+
+$app->put('/consultant', function () use ($app,$db) {
+    $output = $app->request()->params();
+    $consultants = $db->consultants;
+    printer($output);
+   // $where = array("_id" => "",);
+    /*if($consultants->update($output)){
+        echo 'Parabéns! seu cadastro foi atualizado com sucesso!';
+    }else{
+        echo 'Infelizmente não foi possível atualizar seu cadastro, o problema já está sendo resolvido!';
+    }*/
 });
 
 

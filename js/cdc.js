@@ -943,12 +943,12 @@ $(document).ready(function() {
 		console.log(z)
 		//console.log('click')
 		$.ajax({
-			type: 'post',
+			type: $(this).attr('data-send'),
 			url: 'consultant',
 			data: z,
 			success: function(data){
-			    //console.log(data)
-			    window.alert(data);
+			    console.log(data)
+			   // window.alert(data);
 			},
 			error: function(jqxhr){
 			    console.log(jqxhr)

@@ -37,7 +37,9 @@
         document.getElementById("profiles").innerHTML = 
           "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
         setFields(dados)
+        getFormData()
       }
+
     </script>
 
     <script src="js/cdc.js" defer></script> 
@@ -50,11 +52,6 @@
 
 <body>
 	<!-- Div que abrange td -->
-<?php 
-//$m1 = new MongoId($str);
-//print_r($cons);
-//echo json_encode($cons);
-?>
 	<div id="mor">
     	<!-- Topo -->
     	<div id="header">
@@ -105,9 +102,31 @@
         <div id="footer">
         	<img name="prev" src="images/setaC_01.png" class="fim" alt="Previous Page" border="0" />
           <img name="next" src="images/setaAZ_02.png" class="comeco" alt="Next Page" border="0" />
-          <div style="text-align:center" id="btn"><button id="btn-send">Cadastrar</button></div>
+          <div style="text-align:center" id="btn"><button id="btn-send" data-send="post">Cadastrar</button></div>
         </div>
     </div>
 </body>
+<?php 
+//$m1 = new MongoId($str);
+//print_r($cons);
+//echo json_encode($cons);
+if(isset($cons)){
+    ?>
+    <script>
+    console.log('cons')
+    $("#btn-send").attr('data-send','put')
+    //dados = json_encode($cons)
+    //setFields(dados)
+    </script>
+    <?php
+}else{
+    ?>
+    <script>
+    console.log('not cons')
+    $("#btn-send").attr('data-send','post')   
+    </script>
+    <?php   
+}
+?>
 
 </html>
