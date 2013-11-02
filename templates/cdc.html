@@ -57,7 +57,17 @@
     	<div id="header">
         	<div class="divisor">
             </div>
-        	<img src="images/topo.jpg" alt="Cadastro de Consultores" border="0" width="100%" />
+                <div style="text-align:center; width:1376px; margin-left:auto; margin-right:auto;">
+                <img id="Image-Maps_1201311021729107" src="https://dl.dropboxusercontent.com/u/67842866/topo.jpg" usemap="#Image-Maps_1201311021729107" border="0" width="1376" height="194" alt="" />
+                <map id="_Image-Maps_1201311021729107" name="Image-Maps_1201311021729107">
+                <area shape="rect" coords="970,46,1309,131" href="http://smartpublishing.com.br/" alt="http://smartpublishing.com.br/" title="http://smartpublishing.com.br/"    />
+                <area shape="rect" coords="650,47,938,132" href="http://www.crnbrasil.com.br/" alt="http://www.crnbrasil.com.br/" title="http://www.crnbrasil.com.br/"    />
+                <area shape="rect" coords="344,46,625,131" href="http://bioconsultants.com.br/" alt="http://bioconsultants.com.br/" title="http://bioconsultants.com.br/"    />
+                <area shape="rect" coords="66,44,316,129" href="http://expetro.com.br/" alt="http://expetro.com.br/" title="http://expetro.com.br/"    />
+                <area shape="rect" coords="1374,192,1376,194" href="http://www.image-maps.com/index.php?aff=mapped_users_1201311021729107" alt="Image Map" title="Image Map" />
+                </map>
+                </div>
+        	<!--<img src="images/topo.jpg" alt="Cadastro de Consultores" border="0" width="100%" />-->
             <div class="divisor">
             </div>
             <div id="hub">
@@ -110,23 +120,21 @@
 //$m1 = new MongoId($str);
 //print_r($cons);
 //echo json_encode($cons);
-if(isset($cons)){
-    ?>
+if(isset($cons)){?>
     <script>
-    console.log('cons')
-    $("#btn-send").attr('data-send','put')
-    //dados = json_encode($cons)
-    //setFields(dados)
+        console.log('cons')
+        $("#btn-send").attr('data-send','put')
+        //dados = json_encode($cons)
+        //setFields(dados)
     </script>
     <?php
 }else{
     ?>
     <script>
-    console.log('not cons')
-    $("#btn-send").attr('data-send','post')   
-    </script>
+        console.log('not cons')
+        $("#btn-send").attr('data-send','post')   
+        </script>
     <?php   
-}
-?>
+}?>
 
 </html>

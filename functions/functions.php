@@ -267,4 +267,8 @@ function mongoId($_id){
 	}
 	return false;
 }
+
+function getUrlId(){
+	return substr($url, lastIndexOf($_SERVER['HTTP_REFERER'],"/")+1);
+}
 ?>
