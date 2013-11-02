@@ -196,13 +196,17 @@ $app->post('/consultant', function () use ($app,$db) {
 $app->put('/consultant', function () use ($app,$db) {
     $output = $app->request()->params();
     $consultants = $db->consultants;
-    printer($output);
-   // $where = array("_id" => "",);
-    /*if($consultants->update($output)){
+    $data = $output['data'];
+    $_id = $output['_id'];
+    //echo $_id;
+    //$consu = $consultants->findOne(array('_id' => new MongoId($_id)));
+    $where = array("_id" => new MongoId($_id));
+    //printer($consu);
+    if($consultants->update($where,$data)){
         echo 'Parabéns! seu cadastro foi atualizado com sucesso!';
     }else{
         echo 'Infelizmente não foi possível atualizar seu cadastro, o problema já está sendo resolvido!';
-    }*/
+    }
 });
 
 

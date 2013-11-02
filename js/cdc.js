@@ -855,9 +855,17 @@ function changeRadio(ref){
 	})
 }
 
+function changeInput(ref){
+	ref.on('change',':text',function(){
+	 	console.log('X')
+		getFormData();
+	})
+}
+
 function setUp(ref,dados){
 	changeRadio(ref);
-	setOpacity(ref)
+	changeInput(ref);
+	setOpacity(ref);
 	btns(prev);
 	cloneField(ref);
 	clonePosition(ref);	
@@ -938,22 +946,38 @@ $(document).ready(function() {
 
 	$('#btn').on('click','#btn-send',function(e){
 		e.preventDefault();
-		//z = JSON.stringify(getFormData());
-		z = getFormData();
-		console.log(z)
-		//console.log('click')
-		$.ajax({
-			type: $(this).attr('data-send'),
-			url: 'consultant',
-			data: z,
-			success: function(data){
-			    console.log(data)
-			   // window.alert(data);
-			},
-			error: function(jqxhr){
-			    console.log(jqxhr)
-			}
-		})
+		if($(this).attr('data-send')=="post"){
+			//z = JSON.stringify(getFormData());
+			z = getFormData();
+			//console.log(z)
+			$.ajax({
+				type: $(this).attr('data-send'),
+				url: 'consultant',
+				data: z,
+				success: function(data){
+				    console.log(data)
+				    window.alert(data);
+				},
+				error: function(jqxhr){
+				    console.log(jqxhr)
+				}
+			})
+		}else if($(this).attr('data-send')=="put"){
+			z = getFormData();
+			_id = window.location.href.substr(window.location.href.lastIndexOf("/")+1)
+			$.ajax({
+				type: $(this).attr('data-send'),
+				url: 'consultant',
+				data: {data:z,_id:_id},
+				success: function(data){
+				    console.log(data)
+				    //window.alert(data);
+				},
+				error: function(jqxhr){
+				    console.log(jqxhr)
+				}
+			})
+		}
 	})
 		// trigger no form1
 	   $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click');
