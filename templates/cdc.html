@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/form3.css">
     <link rel="stylesheet" type="text/css" href="css/form4.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="js/linkedinObj.js"></script>
 
     <script>
     dados = (Object)
@@ -33,11 +34,16 @@
       }
 
       function displayProfiles(profiles) {
-        dados = profiles.values[0];
-        document.getElementById("profiles").innerHTML = 
-          "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
-        setFields(dados)
-        getFormData()
+        <?php if(isset($cons)){ ?>
+                $("#btn-send").attr('data-send','put')
+                dados = <?php echo json_encode($cons)?>
+        <?php }else{ ?>         
+                dados = profiles.values[0];
+                document.getElementById("profiles").innerHTML = 
+                  "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
+                setFields(dados)
+                getFormData()
+        <?php } ?>
       }
 
     </script>
@@ -124,7 +130,10 @@ if(isset($cons)){?>
     <script>
         console.log('cons')
         $("#btn-send").attr('data-send','put')
-        //dados = json_encode($cons)
+
+        if(dados.length>1){
+            dados = <?php echo json_encode($cons)?>
+        }
         //setFields(dados)
     </script>
     <?php
