@@ -983,4 +983,19 @@ $(document).ready(function() {
 	   $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click');
 	   cloneField($("#nav-top").parent().parent().find('[name="cdc"]'));
 
+
+/*
+linkObj.values[0].firstName = dados['nome']
+linkObj.values[0].lastName = dados['sobrenomenome-ultimo']
+linkObj.values[0].dateOfBirth = {"day": dados['data-nasc'].split("/")[0],"month": dados['data-nasc'].split("/")[1],"year": dados['data-nasc'].split("/")[2]}
+
+
+for(var i in dados.educations){
+    if(typeof dados.educations[i] !== 'function'){
+        console.log(typeof(dados.educations[i]))
+          console.log(dados.educations[i])
+          linkObj.values[0].educations.values.push({"activities": "","degree": "", "endDate": {"year": ""},"fieldOfStudy": "","schoolName": "","startDate": {"year": ""}})
+    }
+}
+*/
 });
