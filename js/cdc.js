@@ -987,17 +987,15 @@ $(document).ready(function() {
 /*
 
 //empregado, employed
-
 //positions
 
 //educations *
 
 //publications
 
-
-fontetrabalho, celular
-workphone, mobile
-
+   
+ trab = ["trab-atual","trab-anterior"]
+ work = ["actual-job","prev-job"]
 fones = ["fonetrabalho", "celular"]
 phones = ["workphone","mobile"]
 
@@ -1023,7 +1021,12 @@ for(var i in dados.phones){
 }
 
 
-
+for(var i in dados.positions){
+    if(typeof dados.positions[i] != 'function' && trab.indexOf(dados.positions[i].type)!=-1){
+       console.log(dados.positions[i]) 
+       linkObj.values[0].positions.push({"company": {"id": "","industry": "","name": "","size": "", "type": "" },"id": "", "isCurrent": "","startDate": {"month": "", "year": ""  },"summary": "","title": ""})
+    }
+}
 
 */
 });
