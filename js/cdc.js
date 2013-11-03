@@ -378,7 +378,7 @@ addPosition : function(company_name, start_date, end_date, position_title, indus
 },
 "phones" : [],
 addFone : function(number, type){
-	objConsultor.phones.push({"phoneNumer" : number, "phoneType" : type})
+	objConsultor.phones.push({"phoneNumber" : number, "phoneType" : type})
 },
 "logradouro-resid":"",
 "estado-resid":"",
@@ -782,27 +782,27 @@ function clonePosition(ref){
 			}
 			
 			$cloneducation = '<div class="'+real_class+'">';
-	        $cloneducation += '<fieldset class="fields">';
-	              $cloneducation += '<legend></legend>';
-	                $cloneducation += '<p>';
-	            	$cloneducation += $labels[0]+'<br />';
-	            	$cloneducation += '<input name="'+$inputs[0].attr('name')+'" type="text">';
-	                $cloneducation += '</p>';
-	                $cloneducation += '<p>';
-	                $cloneducation += $labels[1]+'<br />';
-	                $cloneducation += '<input name="'+$inputs[1].attr('name')+'" type="text">';
-	                $cloneducation += '</p>';
-	                $cloneducation += '<p>';
-	            	$cloneducation += $labels[2].split(' ')[0]+'<input name="'+$inputs[2].attr('name')+'" class="data" type="text"> '+$labels[2].split(' ')[2]+' <input name="'+$inputs[3].attr('name')+'"  class="data" type="text">';
-	                $cloneducation += '</p>';
-	                $cloneducation += '<p>';
-	            	$cloneducation += $labels[3]+'<br />';
-	            	$cloneducation += '<input name="'+$inputs[4].attr('name')+'" type="text">';
-	                $cloneducation += '</p>';
-	                $cloneducation += '<p>';
-	            	$cloneducation += $labels[4]+'<br />'
-	            	$cloneducation += '<input name="'+$inputs[5].attr('name')+'" type="text"><br />';
-	                $cloneducation += '</p>';
+	        	$cloneducation += '<fieldset class="fields">';
+	        		$cloneducation += '<legend></legend>';
+	        			$cloneducation += '<p>';
+	     				 	$cloneducation += $labels[0]+'<br />';
+	      					$cloneducation += '<input name="'+$inputs[0].attr('name')+'" type="text">';
+	         			$cloneducation += '</p>';
+	         			$cloneducation += '<p>';
+	        				$cloneducation += $labels[1]+'<br />';
+	        				$cloneducation += '<input name="'+$inputs[1].attr('name')+'" type="text">';
+	        			$cloneducation += '</p>';
+	         			$cloneducation += '<p>';
+	     		 			$cloneducation += $labels[2].split(' ')[0]+'<input name="'+$inputs[2].attr('name')+'" class="data" type="text"> '+$labels[2].split(' ')[2]+' <input name="'+$inputs[3].attr('name')+'"  class="data" type="text">';
+	         			$cloneducation += '</p>';
+	         			$cloneducation += '<p>';
+	      					$cloneducation += $labels[3]+'<br />';
+	     					$cloneducation += '<input name="'+$inputs[4].attr('name')+'" type="text">';
+	        			$cloneducation += '</p>';
+	         			$cloneducation += '<p>';
+	      					$cloneducation += $labels[4]+'<br />'
+	      					$cloneducation += '<input name="'+$inputs[5].attr('name')+'" type="text"><br />';
+	         			$cloneducation += '</p>';
 	            $cloneducation += '</fieldset>';
 	            $cloneducation += '<img class="minus_frm3" data-field="'+ctd_field+'" src ="images/minus16_icon.png"/></div>';
 	        $cloneducation += '</div>';
@@ -857,7 +857,7 @@ function changeRadio(ref){
 
 function changeInput(ref){
 	ref.on('change',':text',function(){
-	 	console.log('X')
+	 	//console.log('X')
 		getFormData();
 	})
 }
@@ -985,17 +985,45 @@ $(document).ready(function() {
 
 
 /*
+
+//empregado, employed
+
+//positions
+
+//educations *
+
+//publications
+
+
+fontetrabalho, celular
+workphone, mobile
+
+fones = ["fonetrabalho", "celular"]
+phones = ["workphone","mobile"]
+
 linkObj.values[0].firstName = dados['nome']
 linkObj.values[0].lastName = dados['sobrenomenome-ultimo']
 linkObj.values[0].dateOfBirth = {"day": dados['data-nasc'].split("/")[0],"month": dados['data-nasc'].split("/")[1],"year": dados['data-nasc'].split("/")[2]}
-
+linkObj.values[0].emailAddress = dados['email-consultoria']
+linkObj.values[0].mainAddress = dados.logradouro
 
 for(var i in dados.educations){
-    if(typeof dados.educations[i] !== 'function'){
-        console.log(typeof(dados.educations[i]))
-          console.log(dados.educations[i])
-          linkObj.values[0].educations.values.push({"activities": "","degree": "", "endDate": {"year": ""},"fieldOfStudy": "","schoolName": "","startDate": {"year": ""}})
+    if(typeof dados.educations[i] !== 'function' && dados.educations[i].type=="academico"){
+        //console.log(typeof(dados.educations[i]))
+        //console.log(dados.educations[i].type)
+          linkObj.values[0].educations.values.push({"activities": dados.educations[i].activities,"degree": dados.educations[i].degree, "endDate": {"year": dados.educations[i].endDate},"fieldOfStudy": "","schoolName": dados.educations[i].schoolName,"startDate": {"year": dados.educations[i].startDate}})
     }
 }
+
+for(var i in dados.phones){
+    if(typeof dados.phones[i] != 'function' && dados.phones[i].phoneNumber != " " && fones.indexOf(dados.phones[i].phoneType)!=-1){
+      console.log(dados.phones[i]) 
+      linkObj.values[0].phoneNumbers.values.push({"phoneNumber": dados.phones[i].phoneNumber,"phoneType": dados.phones[i].phoneType})
+    }
+}
+
+
+
+
 */
 });
