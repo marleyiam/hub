@@ -1023,8 +1023,13 @@ for(var i in dados.phones){
 
 for(var i in dados.positions){
     if(typeof dados.positions[i] != 'function' && trab.indexOf(dados.positions[i].type)!=-1){
-       console.log(dados.positions[i]) 
-       linkObj.values[0].positions.push({"company": {"id": "","industry": "","name": "","size": "", "type": "" },"id": "", "isCurrent": "","startDate": {"month": "", "year": ""  },"summary": "","title": ""})
+       //console.log(dados.positions[i].startDate.split("/")) 
+       current = dados.positions[i].type == "trab-atual"?true:false
+       if(current==true){
+       		linkObj.values[0].positions.values.push({"company": {"industry": dados.positions[i].industry,"name": dados.positions[i].companyName},"id": "", "isCurrent": current,"startDate": {"month": dados.positions[i].startDate.split("/")[0], "year": dados.positions[i].startDate.split("/")[1]  },"summary": dados.positions[i].summary,"title": dados.positions[i].positionTitle})
+       }else{
+            linkObj.values[0].positions.values.push({"company": {"industry": dados.positions[i].industry,"name": dados.positions[i].companyName},"endDate": { "month": dados.positions[i].endDate.split("/")[0],"year": dados.positions[i].endDate.split("/")[1] },"id": "", "isCurrent": current,"startDate": {"month": dados.positions[i].startDate.split("/")[0], "year": dados.positions[i].startDate.split("/")[1]  },"summary": dados.positions[i].summary,"title": dados.positions[i].positionTitle})
+       }
     }
 }
 
