@@ -35,14 +35,18 @@
 
       function displayProfiles(profiles) {
         <?php if(isset($cons)){ ?>
-                $("#btn-send").attr('data-send','put')
-                dados = <?php echo json_encode($cons)?>
+                $("#btn-send").attr('data-send','put');
+                dados = <?php echo json_encode($cons)?>;
+                e = bindData(dados);
+                dados = e.values[0];
+                setFields(dados);
+                getFormData();
         <?php }else{ ?>         
                 dados = profiles.values[0];
                 document.getElementById("profiles").innerHTML = 
                   "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
-                setFields(dados)
-                getFormData()
+                setFields(dados);
+                getFormData();
         <?php } ?>
       }
 
