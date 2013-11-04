@@ -915,8 +915,9 @@ function setUp(ref,dados){
 
 $(document).ready(function() {
 	/** botao voltar */
-	$("#footer").on('click','[name="prev"]',function(e){
+	$(".bolt").on('click','[name="prev"]',function(e){
 		e.preventDefault();
+
 		pn = parseInt($('[id^="pt"]').attr('data'));
 		$('[name="cdc"]').html('');
 		prev = pn>1? pn-1 : 1;
@@ -933,11 +934,18 @@ $(document).ready(function() {
 	});
 
 	/** botao avançar */
-	$("#footer").on('click','[name="next"]',function(e){
+	$(".bolt").on('click','[name="next"]',function(e){
 		e.preventDefault();
+
 		pn = parseInt($('[id^="pt"]').attr('data'));
 		$('[name="cdc"]').html('');
 		next = pn<4? pn+1 : 4;
+
+		if(next==4){
+			$(".hdr").css("display","none")
+			$("#nav-top").css("display","inline")
+		}
+
 		str = 'form'+next.toString()+'.html';
 		$('[name="cdc"]').load(str,function(){
 			setUp($(this),dados);
@@ -959,6 +967,7 @@ $(document).ready(function() {
 	/** botoes numerados */
 	$('#nav-top').find('ul').on('click','li',function(e){
 		e.preventDefault();
+
 		fn = $(this).find('img').attr('data');
 		console.log('fn :'+fn)
 		str = 'form'+fn+'.html';
@@ -1023,54 +1032,4 @@ $(document).ready(function() {
 	   $("#nav-top").find('ul').find('li').find('img').eq(0).trigger('click');
 	   cloneField($("#nav-top").parent().parent().find('[name="cdc"]'));
 
-
-/*
-
-//empregado, employed
-//positions * 
-
-//educations *
-
-//publications &
-
-fones = ["fonetrabalho", "celular"]
-phones = ["workphone","mobile"]
-trab = ["trab-atual","trab-anterior"]
-work = ["actual-job","prev-job"]
-
-linkObj.values[0].firstName = dados['nome']
-linkObj.values[0].lastName = dados['sobrenomenome-ultimo']
-linkObj.values[0].dateOfBirth = {"day": dados['data-nasc'].split("/")[0],"month": dados['data-nasc'].split("/")[1],"year": dados['data-nasc'].split("/")[2]}
-linkObj.values[0].emailAddress = dados['email-consultoria']
-linkObj.values[0].mainAddress = dados.logradouro
-
-for(var i in dados.educations){
-    if(typeof dados.educations[i] !== 'function' && dados.educations[i].type=="academico"){
-        //console.log(typeof(dados.educations[i]))
-        //console.log(dados.educations[i].type)
-          linkObj.values[0].educations.values.push({"activities": dados.educations[i].activities,"degree": dados.educations[i].degree, "endDate": {"year": dados.educations[i].endDate},"fieldOfStudy": "","schoolName": dados.educations[i].schoolName,"startDate": {"year": dados.educations[i].startDate}})
-    }
-}
-
-for(var i in dados.phones){
-    if(typeof dados.phones[i] != 'function' && dados.phones[i].phoneNumber != " " && fones.indexOf(dados.phones[i].phoneType)!=-1){
-      console.log(dados.phones[i]) 
-      linkObj.values[0].phoneNumbers.values.push({"phoneNumber": dados.phones[i].phoneNumber,"phoneType": dados.phones[i].phoneType})
-    }
-}
-
-
-for(var i in dados.positions){
-    if(typeof dados.positions[i] != 'function' && trab.indexOf(dados.positions[i].type)!=-1){
-       //console.log(dados.positions[i].startDate.split("/")) 
-       current = dados.positions[i].type == "trab-atual"?true:false
-       if(current==true){
-       		linkObj.values[0].positions.values.push({"company": {"industry": dados.positions[i].industry,"name": dados.positions[i].companyName},"id": "", "isCurrent": current,"startDate": {"month": dados.positions[i].startDate.split("/")[0], "year": dados.positions[i].startDate.split("/")[1]  },"summary": dados.positions[i].summary,"title": dados.positions[i].positionTitle})
-       }else{
-            linkObj.values[0].positions.values.push({"company": {"industry": dados.positions[i].industry,"name": dados.positions[i].companyName},"endDate": { "month": dados.positions[i].endDate.split("/")[0],"year": dados.positions[i].endDate.split("/")[1] },"id": "", "isCurrent": current,"startDate": {"month": dados.positions[i].startDate.split("/")[0], "year": dados.positions[i].startDate.split("/")[1]  },"summary": dados.positions[i].summary,"title": dados.positions[i].positionTitle})
-       }
-    }
-}
-
-*/
 });

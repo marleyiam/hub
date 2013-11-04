@@ -185,7 +185,7 @@ $app->post('/consultant', function () use ($app,$db) {
     $output = $app->request()->params();
     $consultants = $db->consultants;
     if($consultants->insert($output)){
-        echo 'Parabéns! seu cadastrado foi realizado com sucesso!';
+        echo 'Parabéns! seu cadastro foi realizado com sucesso!';
     }else{
         echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
     }
