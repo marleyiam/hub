@@ -357,11 +357,8 @@ Array.prototype.inArray = function(comparer) {
 }
 
 Array.prototype.contains = function(v) {
-	//console.log('contains')
     var i = this.length
     while (i--) {
-
-        //console.log(this[i][Object.keys(this[i])[0]])
         if (this[i][Object.keys(this[i])[0]] == v) {
             return true
         }
@@ -507,8 +504,6 @@ addFone : function(number, type){
 "other-reading":"",
 "other-speaking":"",
 "other-writing":"",
-
-
 
 "int-ability":"",
 "analytic-frame":"",
@@ -897,9 +892,31 @@ function changeRadio(ref){
 
 function changeInput(ref){
 	ref.on('change',':text',function(){
-	 	//console.log('X')
+	 	//console.log('changeInput')
 		getFormData();
 	})
+}
+
+function focusValidate(ref){
+	/*ref.on('focusout','input:text[required]',function(){
+		console.log($('[name="cdc"]')[0].checkValidity())
+		if($('[name="cdc"]')[0].checkValidity()==false){
+			$(this).parent().show();
+		}
+	})*/
+ref.on('focusout','[required]',function(event) {
+    event.target.checkValidity();
+}).bind('invalid', function(event) {
+    setTimeout(function() { $(event.target).focus();}, 50);
+});
+}
+
+function validate(){
+	if($('[name="cdc"]')[0].checkValidity()==false){
+		$('[name="cdc"] :invalid').each(function(i,it){
+		    invalidos.push($(it).parent().text().trim())
+		})
+	}
 }
 
 function setUp(ref,dados){
@@ -911,6 +928,8 @@ function setUp(ref,dados){
 	clonePosition(ref);	
 	setFields(dados);
 	getFormData();
+	validate();
+	focusValidate(ref);
 }
 
 $(document).ready(function() {
@@ -999,33 +1018,42 @@ $(document).ready(function() {
 			//z = JSON.stringify(getFormData());
 			z = getFormData();
 			//console.log(z)
-			$.ajax({
-				type: $(this).attr('data-send'),
-				url: 'consultant',
-				data: z,
-				success: function(data){
-				    //console.log(data)
-				    window.alert(data);
-				},
-				error: function(jqxhr){
-				    console.log(jqxhr)
-				}
-			})
+			if(invalidos.length<0){
+				$.ajax({
+					type: $(this).attr('data-send'),
+					url: 'consultant',
+					data: z,
+					success: function(data){
+					    //console.log(data)
+					    window.alert(data);
+					},
+					error: function(jqxhr){
+					    console.log(jqxhr)
+					}
+				})
+			}else{
+				window.alert("O(s) seguinte(s) campo(s) não foi(foram) preenchido(s) :"+invalidos)
+			}
 		}else if($(this).attr('data-send')=="put"){
 			z = getFormData();
 			_id = window.location.href.substr(window.location.href.lastIndexOf("/")+1)
-			$.ajax({
-				type: $(this).attr('data-send'),
-				url: 'consultant',
-				data: {data:z,_id:_id},
-				success: function(data){
-				    //console.log(data)
-				    window.alert(data);
-				},
-				error: function(jqxhr){
-				    console.log(jqxhr)
-				}
-			})
+
+			if(invalidos.length<0){
+				$.ajax({
+					type: $(this).attr('data-send'),
+					url: 'consultant',
+					data: {data:z,_id:_id},
+					success: function(data){
+					    //console.log(data)
+					    window.alert(data);
+					},
+					error: function(jqxhr){
+					    console.log(jqxhr)
+					}
+				})
+			}else{
+				window.alert("O(s) seguinte(s) campo(s) não foi(foram) preenchido(s) :"+invalidos)
+			}
 		}
 	})
 		// trigger no form1

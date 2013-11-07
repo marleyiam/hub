@@ -5,6 +5,24 @@ $(document).ready(function(){
         $(this).tab('show')
     })
 
+    $(".pull-left,.pull-right").on('click','#remove',function(e){
+        if(confirm('Tem certeza que deseja remover esse registro ?')){
+            e.preventDefault()
+            $.ajax({
+                type: "delete",
+                url:  "consultant",
+                data: {_id:$(this).attr('data-id')},
+                success: function(data){
+                    window.alert(data)
+                    $(this).closest('tr').remove();
+                },
+                error: function(jqxhr){
+                    window.alert(jqxhr)
+                }
+            })
+        }
+    })
+
 	//window.alert('hey!')
 	/*$('[name="submit"]').click(function(e){
 	    e.preventDefault();

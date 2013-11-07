@@ -210,6 +210,18 @@ $app->put('/consultant', function () use ($app,$db) {
 });
 
 
+$app->delete('/consultant', function () use ($app,$db) {
+    $output = $app->request()->params();
+    $consultants = $db->consultants;
+    $_id = $output['_id'];
+    $where = array("_id" => new MongoId($_id));
+    if($consultants->remove($where)){
+        echo 'O registro foi removido com sucesso!';
+    }else{
+        echo 'Não foi possível remover esse registro';
+    }
+});
+
 $app->error(function (\Exception $e) use ($app) {
     $app->render('error.html');
 });
