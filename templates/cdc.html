@@ -45,7 +45,7 @@
         <?php }else{ ?>         
                 dados = profiles.values[0];
                 document.getElementById("profiles").innerHTML = 
-                  "\n<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
+                  "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
                 setFields(dados);
                 getFormData();
         <?php } ?>
@@ -59,7 +59,7 @@
 <body>
 	<!-- Div que abrange td -->
 	<div id="mor">
-            
+
     	<!-- Topo -->
     	<div id="header">
         	<div class="divisor">
@@ -79,6 +79,46 @@
             </div>
             <div id="hub">
             	<img src="images/hub.png" alt="Cadastro de Consultores" border="0" />
+            </div>
+            <div>
+
+                <div id="linkedin" style="float:left;">
+                    <div style="float:left;">
+                        <img src="images/linkedin.png" alt="Linkedin" border="0">
+                    </div>
+                    <!-- texto PT -->
+                    <div style="width:20%;padding:0 2%;float:left;color:#999;margin-top:30px;">
+                        <span style="font-size:14pt;">O HUB DE CONSULTORIA</span><br />
+                        é um cadastro de consultores comum ao grupo de consultoria composto
+                    pelas empresas Expetro, Bioconsultants, CRN e Smartpublishing. Caso você já
+                    tenha uma conta no LinkedIn, pode conectá-la a este cadastro clicando no
+                    ícone ao lado. Com isso, seus dados serão importados diretamente do
+                    LinkedIn. Após, você poderá editar os dados aqui no HUB. Nenhuma destas
+                    operações irá alterar qualquer comportamento ou informação da sua conta no
+                    LinkedIn.
+                    </div>
+                    <!-- texto EN -->
+                    <div style="width:20%;padding:0 2%;float:left;color:#999;margin-top:30px;">
+                        <span style="font-size:14pt;">THIS CONSULTANT HUB</span><br /> is a
+                    consultants listing shared by the associated firms Expetro, Bioconsultants,
+                    CRN e Smartpublishing. In case you already have an LinkedIn account,
+                    you can connect it with this form by clicking in the icon aside. Your
+                    LinkedIn data will be automatically imported and you will be also able to
+                    edit its related fields in this form. None of these operations will alter any information at your LinkedIn register.
+                    </div>
+                </div>
+                <div id="lgn" style="width:15%;text-align:center;">
+                    <script type="IN/Login"></script>
+                </div>
+
+                </br></br>
+
+                <div id="profiles" style="width:28%;text-align:center;"></div>
+
+                <div style="width:15%;text-align:center;">
+                    <a href="javascript:void(0)" onClick="IN.User.logout()"><i>Clique aqui para sair do Linkedin</i></a>
+                </div>
+                <div id="fb-root"></div>
             </div>
             <div id="nav-top" style="display:none">
                 <ul>
@@ -102,47 +142,7 @@
             </div>
         </div>
 
-        <div>
 
-            <div id="linkedin" style="float:left;">
-                <div style="float:left;">
-                    <img src="images/linkedin.png" alt="Linkedin" border="0">
-                </div>
-                <!-- texto PT -->
-                <div style="width:20%;padding:0 2%;float:left;color:#999;margin-top:30px;">
-                    <span style="font-size:14pt;">O HUB DE CONSULTORIA</span><br />
-                    é um cadastro de consultores comum ao grupo de consultoria composto
-                pelas empresas Expetro, Bioconsultants, CRN e Smartpublishing. Caso você já
-                tenha uma conta no LinkedIn, pode conectá-la a este cadastro clicando no
-                ícone ao lado. Com isso, seus dados serão importados diretamente do
-                LinkedIn. Após, você poderá editar os dados aqui no HUB. Nenhuma destas
-                operações irá alterar qualquer comportamento ou informação da sua conta no
-                LinkedIn.
-                </div>
-                <!-- texto EN -->
-                <div style="width:20%;padding:0 2%;float:left;color:#999;margin-top:30px;">
-                    <span style="font-size:14pt;">THIS CONSULTANT HUB</span><br /> is a
-                consultants listing shared by the associated firms Expetro, Bioconsultants,
-                CRN e Smartpublishing. In case you already have an account with LinkedIn,
-                you can connect it with this form by clicking in the icon aside. Your
-                LinkedIn data will be automatically imported and you will be also able to
-                edit the fields of this form. None of these operations will alter any of
-                the information at your LinkedIn register.
-                </div>
-            </div>
-            <div id="lgn" style="width:15%;text-align:center;">
-                <script type="IN/Login"></script>
-            </div>
-
-            </br></br>
-
-            <div id="profiles" style="width:28%;text-align:center;"></div>
-
-            <div style="width:15%;text-align:center;">
-                <a href="javascript:void(0)" onClick="IN.User.logout()"><i>Clique aqui para sair do Linkedin</i></a>
-            </div>
-            <div id="fb-root"></div>
-        </div>
         
         <!-- Corpo do cadastro -->
         <div id="content">
