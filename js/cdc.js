@@ -898,17 +898,21 @@ function changeInput(ref){
 }
 
 function focusValidate(ref){
-	/*ref.on('focusout','input:text[required]',function(){
-		console.log($('[name="cdc"]')[0].checkValidity())
-		if($('[name="cdc"]')[0].checkValidity()==false){
-			$(this).parent().show();
-		}
-	})*/
-ref.on('focusout','[required]',function(event) {
-    event.target.checkValidity();
-}).bind('invalid', function(event) {
-    setTimeout(function() { $(event.target).focus();}, 50);
-});
+
+	$(':input[required]').focusout(function(event) {
+		console.log("v")
+    	event.target.checkValidity();
+	}).bind('invalid', function(event) {
+    	//setTimeout(function() { $(event.target).focus();}, 50);
+	});
+		/*ref.on('focusout',':input[required]',function(event) {
+			//console.log(event.target.checkValidity())
+			console.log(event.target)
+		    if(event.target.checkValidity()==false){
+
+		    	//$("#btn-send").trigger("click")		
+		    }
+		})*/	
 }
 
 function validate(){
@@ -916,6 +920,14 @@ function validate(){
 		$('[name="cdc"] :invalid').each(function(i,it){
 		    invalidos.push($(it).parent().text().trim())
 		})
+	}
+}
+
+function errorsAny(){
+	if($('[name="cdc"]')[0].checkValidity()==false){
+		return false;	
+	}else{
+		true;
 	}
 }
 
