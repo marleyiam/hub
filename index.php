@@ -11,7 +11,7 @@ $app = new \Slim\Slim();
 session_start();
 
 $mongo = "";  
-if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com"){
+if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com" || $_SERVER['SERVER_NAME'] == "www.cadastrodeconsultores.com.br" ){
     $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
 }else if($_SERVER['SERVER_NAME'] == "localhost"){
     $mongo = new Mongo('mongodb://localhost:27017');
