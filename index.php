@@ -10,7 +10,8 @@ $app = new \Slim\Slim();
 
 session_start();
 
-printer( $_SERVER['SERVER_ADDR']);
+//printer( $_SERVER['SERVER_ADDR']); // "172.16.192.82"
+printer(get_machine_ips());
 $mongo = "";  
 if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com" || $_SERVER['SERVER_NAME'] == "www.cadastrodeconsultores.com.br" ){
     $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');

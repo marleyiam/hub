@@ -271,4 +271,23 @@ function mongoId($_id){
 function getUrlId(){
 	return substr($url, lastIndexOf($_SERVER['HTTP_REFERER'],"/")+1);
 }
+
+function get_machine_ips(){
+    $ips = array();
+    exec("/sbin/ifconfig", $catch);
+    foreach($catch as $line){
+	    if (eregi('inet addr:', $line)){
+	            $line = str_replace(" ", ":", $line);
+	            $line = explode(":", $line);
+	            $line = array_filter($line);
+	            foreach ($line as $v){
+	                    if (ip2long($v)){
+	                            $ips[] = $v;
+	                    }
+	            }
+	    }
+    }
+    return $ips;
+}
+
 ?>
