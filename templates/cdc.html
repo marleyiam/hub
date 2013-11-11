@@ -34,7 +34,7 @@
         IN.API.Profile("me").fields('id','first-name','last-name','main-address','headline','location:(name,country:(code))','industry','summary','specialties','positions','picture-url','public-profile-url','email-address','associations','interests','languages','publications','patents','skills','certifications','educations','courses','date-of-birth','phone-numbers','bound-account-types','im-accounts','twitter-accounts','primary-twitter-account').result(displayProfiles);
       }
 
-      function displayProfiles(profiles) {
+      function displayProfiles(profiles){
         <?php if(isset($cons)){ ?>
                 $("#btn-send").attr('data-send','put');
                 $("#btn-send").text("Atualizar");

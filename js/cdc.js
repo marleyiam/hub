@@ -940,8 +940,8 @@ function setUp(ref,dados){
 	clonePosition(ref);	
 	setFields(dados);
 	getFormData();
-	validate();
-	focusValidate(ref);
+	//validate();
+	//focusValidate(ref);
 }
 
 $(document).ready(function() {
@@ -1030,7 +1030,7 @@ $(document).ready(function() {
 			//z = JSON.stringify(getFormData());
 			z = getFormData();
 			//console.log(z)
-			if(invalidos.length<0){
+			//if(invalidos.length<0){
 				$.ajax({
 					type: $(this).attr('data-send'),
 					url: 'consultant',
@@ -1043,14 +1043,14 @@ $(document).ready(function() {
 					    console.log(jqxhr)
 					}
 				})
-			}else{
-				window.alert("O(s) seguinte(s) campo(s) não foi(foram) preenchido(s) :"+invalidos)
-			}
+			//}else{
+			//	window.alert("O(s) seguinte(s) campo(s) não foi(foram) preenchido(s) :"+invalidos)
+			//}
 		}else if($(this).attr('data-send')=="put"){
 			z = getFormData();
 			_id = window.location.href.substr(window.location.href.lastIndexOf("/")+1)
 
-			if(invalidos.length<0){
+			//if(invalidos.length<0){
 				$.ajax({
 					type: $(this).attr('data-send'),
 					url: 'consultant',
@@ -1063,9 +1063,9 @@ $(document).ready(function() {
 					    console.log(jqxhr)
 					}
 				})
-			}else{
-				window.alert("O(s) seguinte(s) campo(s) não foi(foram) preenchido(s) :"+invalidos)
-			}
+			//}else{
+			//	window.alert("O(s) seguinte(s) campo(s) não foi(foram) preenchido(s) :"+invalidos)
+			//}
 		}
 	})
 		// trigger no form1
