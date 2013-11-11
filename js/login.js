@@ -7,6 +7,7 @@ $(document).ready(function(){
 
     $(".pull-left,.pull-right").on('click','#remove',function(e){
         if(confirm('Tem certeza que deseja remover esse registro ?')){
+            $clk = $(this)
             e.preventDefault()
             $.ajax({
                 type: "delete",
@@ -14,7 +15,7 @@ $(document).ready(function(){
                 data: {_id:$(this).attr('data-id')},
                 success: function(data){
                     window.alert(data)
-                    $(this).closest('tr').remove();
+                    $clk.closest('tr').remove();
                 },
                 error: function(jqxhr){
                     window.alert(jqxhr)
