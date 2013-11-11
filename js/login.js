@@ -16,6 +16,7 @@ $(document).ready(function(){
                 success: function(data){
                     window.alert(data)
                     $clk.closest('tr').remove();
+                    $('.count_consult').text(parseInt($('.count_consult').text())-1)
                 },
                 error: function(jqxhr){
                     window.alert(jqxhr)
