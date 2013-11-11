@@ -36,6 +36,7 @@
 
       function displayProfiles(profiles){
         <?php if(isset($cons)){ ?>
+            console.log('cons is set')
                 $("#btn-send").attr('data-send','put');
                 $("#btn-send").text("Atualizar");
                 dados = <?php echo json_encode($cons)?>;
@@ -43,7 +44,8 @@
                 dados = e.values[0];
                 setFields(dados);
                 getFormData();
-        <?php }else{ ?>         
+        <?php }else{ ?>  
+                console.log('not cons')       
                 dados = profiles.values[0];
                 document.getElementById("profiles").innerHTML = 
                   "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";
@@ -54,7 +56,7 @@
 
     </script>
 
-    <script src="js/cdc.js" defer></script> 
+    <script src="js/cdc.js"></script> 
 </head>
 
 <body>
@@ -135,8 +137,6 @@
                 <img name="next" src="images/setaAZ_02.png" class="comeco" alt="Next Page" border="0" />
             </div>
         </div>
-
-
         
         <!-- Corpo do cadastro -->
         <div id="content">
@@ -154,5 +154,19 @@
           <div style="text-align:center" id="btn"><button id="btn-send" data-send="post">Cadastrar</button></div>
         </div>
     </div>
+    <script>
+    if(dados.length==1){
+        console.log('i')
+      <?php if(isset($cons)){ ?>
+              $("#btn-send").attr('data-send','put');
+              $("#btn-send").text("Atualizar");
+              dados = <?php echo json_encode($cons)?>;
+              e = bindData(dados);
+              dados = e.values[0];
+              setFields(dados);
+              getFormData();
+      <?php }?>  
+    }
+    </script>
 </body>
 </html>
