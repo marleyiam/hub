@@ -36,7 +36,6 @@
 
       function displayProfiles(profiles){
         <?php if(isset($cons)){ ?>
-            console.log('cons is set')
                 $("#btn-send").attr('data-send','put');
                 $("#btn-send").text("Atualizar");
                 dados = <?php echo json_encode($cons)?>;
@@ -44,8 +43,7 @@
                 dados = e.values[0];
                 setFields(dados);
                 getFormData();
-        <?php }else{ ?>  
-                console.log('not cons')       
+        <?php }else{ ?>        
                 dados = profiles.values[0];
                 document.getElementById("profiles").innerHTML = 
                   "<p id=\"" + dados.id + "\">Olá <strong><i>" +  dados.firstName + "  " + dados.lastName + "</i></strong> você esta logado no Linkedin</p>";

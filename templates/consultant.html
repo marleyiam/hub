@@ -313,7 +313,7 @@
                                         <?php
                                         foreach ($consultor['phones'] as $key => $mail) {
 
-                                            if($mail['phoneNumer']!=""){ ?>
+                                            if(isset($mail['phoneNumer']) && $mail['phoneNumer'] !=""){ ?>
                                             <fieldset class="fieldset li">
                                                 <li><strong>Número : </strong><i><?php echo $mail['phoneNumer']?></i></li>
                                                 <li><strong>tipo : </strong><i><?php echo $mail['phoneType']?></i></li>
@@ -625,7 +625,7 @@
                                         <?php
                                         foreach ($consultor['phones'] as $key => $mail) {
 
-                                            if($mail['phoneNumer']!=""){ ?>
+                                            if(isset($mail['phoneNumer']) && $mail['phoneNumer']!=""){ ?>
                                             <fieldset class="fieldset li">
                                                 <li><strong>Number : </strong><i><?php echo $mail['phoneNumer']?></i></li>
                                                 <li><strong>Type : </strong><i><?php echo $mail['phoneType']?></i></li>
