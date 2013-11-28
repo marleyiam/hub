@@ -291,14 +291,15 @@
                                             <li><strong>endereço : </strong><i><?php echo $consultor['email-consultoria']?></i></li>
                                             <li><strong>tipo : </strong><i>consultoria</i></li>
                                         <?php
-                                        foreach ($consultor['mails'] as $key => $mail) {
+                                          if(isset($consultor['mails'])){
+                                            foreach ($consultor['mails'] as $key => $mail) {
 
-                                            if($mail['emailAddress']!=""){ ?>
-                                            
-                                                <li><strong>endereço : </strong><i><?php echo $mail['emailAddress']?></i></li>
-                                                <li><strong>tipo : </strong><i><?php echo $mail['emailType']?></i></li>
-                                            
-                                           <?php }} ?>
+                                                if($mail['emailAddress']!=""){ ?>
+                                                
+                                                    <li><strong>endereço : </strong><i><?php echo $mail['emailAddress']?></i></li>
+                                                    <li><strong>tipo : </strong><i><?php echo $mail['emailType']?></i></li>
+                                                
+                                               <?php }}} ?>
                                         </fieldset>
                                     </ul>
                                 </td>
@@ -311,7 +312,7 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                      
+                                      if(isset($consultor['phones'])){
                                         foreach ($consultor['phones'] as $key => $phone) {
 
                                             if(isset($mail['phoneNumer']) && $mail['phoneNumer'] !=""){ ?>
@@ -319,7 +320,7 @@
                                                 <li><strong>Número : </strong><i><?php echo $phone['phoneNumber']?></i></li>
                                                 <li><strong>tipo : </strong><i><?php echo $phone['phoneType']?></i></li>
                                             </fieldset>
-                                           <?php }} ?>
+                                           <?php }}} ?>
                                     </ul>
                                 </td>
                                 <td></td>
@@ -331,6 +332,8 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
+                                        if(isset($consultor['educations'])){
+
                                         foreach ($consultor['educations'] as $key => $education) {
 
                                             if($education['schoolName']!="" && $education['type']=="academico"){ ?>
@@ -342,7 +345,7 @@
                                                 <li><strong>Tipo de estudo : </strong><i><?php echo $education['activities']?></i></li>
                                                 <li><strong>Título : </strong><i><?php echo $education['degree']?></i></li>
                                             </fieldset>
-                                           <?php }} ?>
+                                           <?php }}} ?>
                                     </ul>
                                 </td>
                                 <td></td>
@@ -371,6 +374,8 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
+                                        if(isset($consultor['positions'])){
+
                                         foreach ($consultor['positions'] as $key => $mail) {
 
                                             if($mail['companyName']!="" && $mail['type']=="trab-atual"){ ?>
@@ -394,7 +399,8 @@
                                               
                                            <?php }
 
-                                       } ?>
+                                       }
+                                      } ?>
                                     </ul>
                                 </td>
                                 <td></td>
@@ -604,14 +610,15 @@
                                             <li><strong>Address : </strong><i><?php echo $consultor['email-consulting']?></i></li>
                                             <li><strong>Type : </strong><i>consulting</i></li>
                                         <?php
-                                        foreach ($consultor['mails'] as $key => $mail) {
+                                        if(isset($consultor['mails'])){
+                                          foreach ($consultor['mails'] as $key => $mail) {
 
-                                            if($mail['emailAddress']!=""){ ?>
-                                            
-                                                <li><strong>Address : </strong><i><?php echo $mail['emailAddress']?></i></li>
-                                                <li><strong>Type : </strong><i><?php echo $mail['emailType']?></i></li>
-                                            
-                                           <?php }} ?>
+                                              if($mail['emailAddress']!=""){ ?>
+                                              
+                                                  <li><strong>Address : </strong><i><?php echo $mail['emailAddress']?></i></li>
+                                                  <li><strong>Type : </strong><i><?php echo $mail['emailType']?></i></li>
+                                              
+                                             <?php }}} ?>
                                         </fieldset>
                                     </ul>
                                 </td>
@@ -624,16 +631,16 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['phones'] as $key => $obj) {
+                                        if(isset($consultor['phones'])){
+                                          foreach ($consultor['phones'] as $key => $obj) {
 
+                                              if(isset($mail['phoneNumer']) && $mail['phoneNumer']!=""){ ?>
 
-                                            if(isset($mail['phoneNumer']) && $mail['phoneNumer']!=""){ ?>
-
-                                            <fieldset class="fieldset li">
-                                                <li><strong>Number : </strong><i><?php echo $obj['phoneNumber']?></i></li>
-                                                <li><strong>Type : </strong><i><?php echo $obj['phoneType']?></i></li>
-                                            </fieldset>
-                                           <?php }} ?>
+                                              <fieldset class="fieldset li">
+                                                  <li><strong>Number : </strong><i><?php echo $obj['phoneNumber']?></i></li>
+                                                  <li><strong>Type : </strong><i><?php echo $obj['phoneType']?></i></li>
+                                              </fieldset>
+                                             <?php }}} ?>
                                     </ul>
                                 </td>
                                 <td></td>
@@ -645,18 +652,19 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['educations'] as $key => $obj) {
+                                        if(isset($consultor['educations'])){
+                                          foreach ($consultor['educations'] as $key => $obj) {
 
-                                            if($obj['schoolName']!="" && $obj['type']=="academic"){ ?>
-                                            <fieldset class="fieldset li">
-                                                <li><strong>Name : </strong><i><?php echo $obj['schoolName']?></i></li>
-                                                <li><strong>Local : </strong><i><?php echo $obj['local']?></i></li>
-                                                <li><strong>Start : </strong><i><?php echo $obj['startDate']?></i></li>
-                                                <li><strong>End : </strong><i><?php echo $obj['endDate']?></i></li>
-                                                <li><strong>Activities : </strong><i><?php echo $obj['activities']?></i></li>
-                                                <li><strong>Degree : </strong><i><?php echo $obj['degree']?></i></li>
-                                            </fieldset>
-                                           <?php }} ?>
+                                              if($obj['schoolName']!="" && $obj['type']=="academic"){ ?>
+                                              <fieldset class="fieldset li">
+                                                  <li><strong>Name : </strong><i><?php echo $obj['schoolName']?></i></li>
+                                                  <li><strong>Local : </strong><i><?php echo $obj['local']?></i></li>
+                                                  <li><strong>Start : </strong><i><?php echo $obj['startDate']?></i></li>
+                                                  <li><strong>End : </strong><i><?php echo $obj['endDate']?></i></li>
+                                                  <li><strong>Activities : </strong><i><?php echo $obj['activities']?></i></li>
+                                                  <li><strong>Degree : </strong><i><?php echo $obj['degree']?></i></li>
+                                              </fieldset>
+                                             <?php }}} ?>
                                     </ul>
                                 </td>
                                 <td></td>
@@ -685,6 +693,7 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
+                                        if(isset($consultor['positions'])){
                                         foreach ($consultor['positions'] as $key => $obj) {
 
                                             if($obj['companyName']!="" && $obj['type']=="actual-job"){ ?>
@@ -708,7 +717,8 @@
                                               
                                            <?php }
 
-                                       } ?>
+                                       }
+                                      } ?>
                                     </ul>
                                 </td>
                                 <td></td>
