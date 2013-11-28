@@ -311,12 +311,13 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['phones'] as $key => $mail) {
+                                      
+                                        foreach ($consultor['phones'] as $key => $phone) {
 
                                             if(isset($mail['phoneNumer']) && $mail['phoneNumer'] !=""){ ?>
                                             <fieldset class="fieldset li">
-                                                <li><strong>Número : </strong><i><?php echo $mail['phoneNumer']?></i></li>
-                                                <li><strong>tipo : </strong><i><?php echo $mail['phoneType']?></i></li>
+                                                <li><strong>Número : </strong><i><?php echo $phone['phoneNumber']?></i></li>
+                                                <li><strong>tipo : </strong><i><?php echo $phone['phoneType']?></i></li>
                                             </fieldset>
                                            <?php }} ?>
                                     </ul>
@@ -330,16 +331,16 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['educations'] as $key => $mail) {
+                                        foreach ($consultor['educations'] as $key => $education) {
 
-                                            if($mail['schoolName']!="" && $mail['type']=="academico"){ ?>
+                                            if($education['schoolName']!="" && $education['type']=="academico"){ ?>
                                             <fieldset class="fieldset li">
-                                                <li><strong>nome : </strong><i><?php echo $mail['schoolName']?></i></li>
-                                                <li><strong>endereço : </strong><i><?php echo $mail['local']?></i></li>
-                                                <li><strong>Início : </strong><i><?php echo $mail['startDate']?></i></li>
-                                                <li><strong>Fim : </strong><i><?php echo $mail['endDate']?></i></li>
-                                                <li><strong>Tipo de estudo : </strong><i><?php echo $mail['activities']?></i></li>
-                                                <li><strong>Título : </strong><i><?php echo $mail['degree']?></i></li>
+                                                <li><strong>nome : </strong><i><?php echo $education['schoolName']?></i></li>
+                                                <li><strong>endereço : </strong><i><?php echo $education['local']?></i></li>
+                                                <li><strong>Início : </strong><i><?php echo $education['startDate']?></i></li>
+                                                <li><strong>Fim : </strong><i><?php echo $education['endDate']?></i></li>
+                                                <li><strong>Tipo de estudo : </strong><i><?php echo $education['activities']?></i></li>
+                                                <li><strong>Título : </strong><i><?php echo $education['degree']?></i></li>
                                             </fieldset>
                                            <?php }} ?>
                                     </ul>
@@ -623,12 +624,14 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['phones'] as $key => $mail) {
+                                        foreach ($consultor['phones'] as $key => $obj) {
+
 
                                             if(isset($mail['phoneNumer']) && $mail['phoneNumer']!=""){ ?>
+
                                             <fieldset class="fieldset li">
-                                                <li><strong>Number : </strong><i><?php echo $mail['phoneNumer']?></i></li>
-                                                <li><strong>Type : </strong><i><?php echo $mail['phoneType']?></i></li>
+                                                <li><strong>Number : </strong><i><?php echo $obj['phoneNumber']?></i></li>
+                                                <li><strong>Type : </strong><i><?php echo $obj['phoneType']?></i></li>
                                             </fieldset>
                                            <?php }} ?>
                                     </ul>
@@ -642,16 +645,16 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['educations'] as $key => $mail) {
+                                        foreach ($consultor['educations'] as $key => $obj) {
 
-                                            if($mail['schoolName']!="" && $mail['type']=="academic"){ ?>
+                                            if($obj['schoolName']!="" && $obj['type']=="academic"){ ?>
                                             <fieldset class="fieldset li">
-                                                <li><strong>Name : </strong><i><?php echo $mail['schoolName']?></i></li>
-                                                <li><strong>Local : </strong><i><?php echo $mail['local']?></i></li>
-                                                <li><strong>Start : </strong><i><?php echo $mail['startDate']?></i></li>
-                                                <li><strong>End : </strong><i><?php echo $mail['endDate']?></i></li>
-                                                <li><strong>Activities : </strong><i><?php echo $mail['activities']?></i></li>
-                                                <li><strong>Degree : </strong><i><?php echo $mail['degree']?></i></li>
+                                                <li><strong>Name : </strong><i><?php echo $obj['schoolName']?></i></li>
+                                                <li><strong>Local : </strong><i><?php echo $obj['local']?></i></li>
+                                                <li><strong>Start : </strong><i><?php echo $obj['startDate']?></i></li>
+                                                <li><strong>End : </strong><i><?php echo $obj['endDate']?></i></li>
+                                                <li><strong>Activities : </strong><i><?php echo $obj['activities']?></i></li>
+                                                <li><strong>Degree : </strong><i><?php echo $obj['degree']?></i></li>
                                             </fieldset>
                                            <?php }} ?>
                                     </ul>
@@ -682,25 +685,25 @@
                                     <ul style="list-style-type:none">
                                 
                                         <?php
-                                        foreach ($consultor['positions'] as $key => $mail) {
+                                        foreach ($consultor['positions'] as $key => $obj) {
 
-                                            if($mail['companyName']!="" && $mail['type']=="actual-job"){ ?>
+                                            if($obj['companyName']!="" && $obj['type']=="actual-job"){ ?>
                                             <fieldset class="fieldset multiple">
                                                 <legend><small>Actual</small></legend>
-                                                <li><strong>Name : </strong><i><?php echo $mail['companyName']?></i></li>
-                                                <li><strong>Start : </strong><i><?php echo $mail['startDate']?></i></li>
-                                                <li><strong>End : </strong><i><?php echo $mail['endDate']?></i></li>
-                                                <li><strong>Industry : </strong><i><?php echo $mail['industry']?></i></li>
-                                                <li><strong>Descrição : </strong><i><?php echo $mail['summary']?></i></li>
+                                                <li><strong>Name : </strong><i><?php echo $obj['companyName']?></i></li>
+                                                <li><strong>Start : </strong><i><?php echo $obj['startDate']?></i></li>
+                                                <li><strong>End : </strong><i><?php echo $obj['endDate']?></i></li>
+                                                <li><strong>Industry : </strong><i><?php echo $obj['industry']?></i></li>
+                                                <li><strong>Descrição : </strong><i><?php echo $obj['summary']?></i></li>
                                             </fieldset>
-                                           <?php }elseif($mail['companyName']!="" && $mail['type']=="prev-job") {?>
+                                           <?php }elseif($obj['companyName']!="" && $obj['type']=="prev-job") {?>
                                        
                                             <fieldset class="fieldset multiple">
-                                                <li><strong>Name : </strong><i><?php echo $mail['companyName']?></i></li>
-                                                <li><strong>Start : </strong><i><?php echo $mail['startDate']?></i></li>
-                                                <li><strong>End : </strong><i><?php echo $mail['endDate']?></i></li>
-                                                <li><strong>Industry : </strong><i><?php echo $mail['industry']?></i></li>
-                                                <li><strong>Summary : </strong><i><?php echo $mail['summary']?></i></li>
+                                                <li><strong>Name : </strong><i><?php echo $obj['companyName']?></i></li>
+                                                <li><strong>Start : </strong><i><?php echo $obj['startDate']?></i></li>
+                                                <li><strong>End : </strong><i><?php echo $obj['endDate']?></i></li>
+                                                <li><strong>Industry : </strong><i><?php echo $obj['industry']?></i></li>
+                                                <li><strong>Summary : </strong><i><?php echo $obj['summary']?></i></li>
                                             </fieldset>
                                               
                                            <?php }
