@@ -135,20 +135,10 @@ function current_user(){
 	}
 }
 
-function current_user_avatar(){
-	return current_user()? current_user()->user_pictures : 'default-user-picture.png';
-}
-
 function getGlobals() {
     return array(
         'session'   => $_SESSION,
     ) ;
-}
-
-function get_last_id($entity){
-    $last_user = $entity::last();
-    $last_user_id = $last_user? $last_user->id : 0;
-    return ($last_user_id+1);
 }
 
 function validateEmail($email) {
