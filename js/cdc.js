@@ -534,6 +534,7 @@ addFone : function(number, type){
 "country":"",
 "fax-en":"",
 "email-consulting":"",
+"email-consultoria":"",
 "adress-home":"",
 "state-home":"",
 "zipcode-home":"",

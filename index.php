@@ -192,12 +192,27 @@ $app->get('/test', function () use ($app,$db) {
 $app->post('/consultant', function () use ($app,$db) {
     $output = $app->request()->params();
     $consultants = $db->consultants;
-    if($consultants->insert($output)){
-        echo 'Parabéns! seu cadastro foi realizado com sucesso!';
+
+    if(isset($output['email-consulting']) || isset($output['email-consultoria'])){
+        $where = $output['email-consulting']!=""?array("email-consulting" => $output['email-consulting']):array("email-consultoria" => $output['email-consultoria']);
+        $obj = $consultants->findOne($where);
+        if($obj){
+            $where = array("_id" => new MongoId($obj['_id'])); 
+            if($consultants->update($where,$output)){
+                echo 'Seu cadastro foi atualizado com sucesso!';
+            }else{
+                echo 'Não foi possível atualizar seu cadastro, o problema já está sendo resolvido!';  
+            }
+        }else{
+            if($consultants->insert($output)){
+                echo 'Seu cadastro foi realizado com sucesso!';
+            }else{
+                echo 'Não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
+            }
+        }
     }else{
-        echo 'Infelizmente não foi possível realizar seu cadastro, o problema já está sendo resolvido!';
+        echo 'Por favor preencha o e-mail de contato para consultoria (primeira página do formulário de cadastro)';
     }
-    //$mongo->close();
 });
 
 
@@ -211,9 +226,9 @@ $app->put('/consultant', function () use ($app,$db) {
     $where = array("_id" => new MongoId($_id));
     //printer($consu);
     if($consultants->update($where,$data)){
-        echo 'Parabéns! seu cadastro foi atualizado com sucesso!';
+        echo 'Seu cadastro foi atualizado com sucesso!';
     }else{
-        echo 'Infelizmente não foi possível atualizar seu cadastro, o problema já está sendo resolvido!';
+        echo 'Não foi possível atualizar seu cadastro, o problema já está sendo resolvido!';
     }
 });
 
