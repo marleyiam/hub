@@ -33,7 +33,7 @@
       <div class="nav-collapse collapse" id="main-menu">
         <div class="auth pull-right">
             <img class="avatar" src="../img/user-icon.png">
-            <span class="name"><?php echo $_SESSION['user_login']?></span><br/>
+            <span class="name"><?php echo $_SESSION['user']['login']?></span><br/>
             <span class="links">
                 <!--<a href="#">Settings</a>-->
                 <a href="../logout" id="logout">Logout</a>
@@ -74,8 +74,10 @@
                         <div class="kpi count_consult"></div>
                         <div><small>Dados do consultor</small></div>
                         <div class="pull-right">
-                            <a href="../<?=$consultor['_id']?>" class="btn btn-small">editar</a>
-                            <a id="remove" data-id="<?=$consultor['_id']?>" class="btn btn-small">excluir</a>
+                          <?php if($_SESSION['user']['type'] == "admin"){ ?>
+                                    <a href="../<?=$consultor['_id']?>" class="btn btn-small">editar</a>
+                                    <a id="remove" data-id="<?=$consultor['_id']?>" class="btn btn-small">excluir</a>
+                            <?php } ?>
                         </div>
                     </div>
                   </div>

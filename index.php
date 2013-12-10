@@ -45,7 +45,7 @@ $app->get('/', function () use ($app) {
 
 $authenticate = function ($app) {
     return function () use ($app) {
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['user']['_id'])) {
             $app->flash('error', 'É necessário estar logado para acessar o dashboard!');
             $app->redirect(get_root_url().'admin');
         }
@@ -129,12 +129,14 @@ $app->post('/login', function () use ($app,$db) {
         'login' => $data['login'], 'password' => $pass
     );
 
-    $resultado = $users->findOne($criteria);
+    $user = $users->findOne($criteria);
 
        //if (is_object($resultado) && (count(get_object_vars($resultado)) > 0)) {
-    if ($resultado){
-        $_SESSION['user_id'] = $resultado['_id'];
-        $_SESSION['user_login'] = $resultado['login'];
+    if ($user){
+        $_SESSION['user'] = $user;
+        /*$_SESSION['user_id'] = $user['_id'];
+        $_SESSION['user_login'] = $user['login'];
+        $_SESSION['user_type'] = $user['type'];*/
         $app->flash('success', 'Você está logado !');
         $app->redirect(get_root_url().'dashboard');
     }else{
@@ -167,7 +169,23 @@ $app->post('/user', function () use ($app,$db) {
     }else{
         echo 'nem';
     }
-    //$mongo->close();
+});
+
+$app->put('/user', function () use ($app,$db) {
+    $users = $db->users;
+    $data = $app->request()->params();
+    $pass = md5($data['password']);
+
+    $output = array(
+      'login' => $data['login'], 'password' => $pass, 'type' => $data['type']
+    );
+
+    $where = array("login" => $data["login"]); 
+    if($users->update($where,$output)){
+        echo 'Uusuário atualizado com sucesso!';
+    }else{
+        echo 'Não foi possível atualizar este usuário, o problema já está sendo resolvido!';  
+    }
 });
 
 
@@ -176,12 +194,13 @@ $app->get('/test', function () use ($app,$db) {
     //printer($_SERVER["SERVER_SOFTWARE"]);
     //printer($_SERVER['SERVER_NAME']);
 
-    $consultants = $db->consultants;
-    $cons = $consultants->find();
+    $users = $db->users;
+    $cons = $users->find();
 
     foreach ($cons as $obj) {
         echo $obj['_id'] ."<br/>";
-        echo "<strong>Nome:</strong> " . $obj['name'] . "<br/>";
+        echo "<strong>Nome:</strong> " . $obj['login'] . "<br/>";
+        echo "<strong>Type:</strong> " . $obj['type'] . "<br/>";
         
         echo "<br/>";
     }
