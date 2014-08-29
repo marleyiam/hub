@@ -20,7 +20,7 @@ string(14) "172.17.192.247"
 
 $mongo = "";  
 if($_SERVER['SERVER_NAME'] == "hubconsultants.herokuapp.com" || $_SERVER['SERVER_NAME'] == "www.cadastrodeconsultores.com.br"){
-    $mongo = new Mongo('mongodb://marley:v1d4l0k4@paulo.mongohq.com:10004/consultantsDB');
+    $mongo = new Mongo('mongodb://usu:pass@domain:port/DB');
 }else if($_SERVER['SERVER_NAME'] == "localhost"){
     $mongo = new Mongo('mongodb://localhost:27017');
 }else{
